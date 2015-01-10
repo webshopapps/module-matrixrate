@@ -6,6 +6,18 @@
 
 Installation is via composer.
 
+Add the following to the composer.json file in your magento root directory:
+
+        "webshopapps/mage2-matrixrate": "dev-master"
+        
+You also need to specify the repository:
+ 
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/webshopapps/mage2-matrixrate.git"
+        }
+    ]
 
 
 ## Resources
@@ -38,6 +50,12 @@ allows for easier understanding by users.
 We would like to acknowledge and thank the Magento 2 Development team for making their codebase open for such use.
 
 The composer structure is taken from various sources, most heavily using structure from https://github.com/sjparkinson/static-review.
+
+Assistance around composer, Magento2 structure, etc was also taken from these sources:
+
+* https://github.com/Genmato/MultiStoreSearchFields
+* https://alankent.wordpress.com/2014/08/03/creating-a-magento-2-composer-module/
+* https://github.com/SchumacherFM/mage2-advanced-rest-permissions
 
 
 ## License
