@@ -1,6 +1,6 @@
 # WebShopApps MatrixRate
 
-
+A Shipping Rate module for Magento 2.x which supports showing multiple shipping methods.  This is based on the Magento Tablerate module and is managed via a csv file.
 
 ## Installation
 
@@ -8,7 +8,7 @@ Installation is via composer.
 
 Add the following to the composer.json file in your magento root directory:
 
-        "webshopapps/mage2-matrixrate": "dev-master"
+    "webshopapps/mage2-matrixrate": "dev-master"
         
 You also need to specify the repository:
  
@@ -18,6 +18,13 @@ You also need to specify the repository:
             "url": "https://github.com/webshopapps/mage2-matrixrate.git"
         }
     ]
+
+You can now install the module via `composer update` from the root directory.
+
+Finally you need to get the actual module loaded within Magento itself. In Magento 1.x you add a file to app/etc/modules.
+  In Magento 2.x you just add this to `app/etc/config.php`:
+  
+    'Webshopapps_Matrixrate' => 1,
 
 
 ## Resources
@@ -53,9 +60,9 @@ The composer structure is taken from various sources, most heavily using structu
 
 Assistance around composer, Magento2 structure, etc was also taken from these sources:
 
-* https://github.com/Genmato/MultiStoreSearchFields
-* https://alankent.wordpress.com/2014/08/03/creating-a-magento-2-composer-module/
-* https://github.com/SchumacherFM/mage2-advanced-rest-permissions
+* [https://github.com/Genmato/MultiStoreSearchFields](http://)
+* [https://alankent.wordpress.com/2014/08/03/creating-a-magento-2-composer-module/](http://)
+* [https://github.com/SchumacherFM/mage2-advanced-rest-permissions](http://)
 
 
 ## License

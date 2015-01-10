@@ -58,5 +58,13 @@
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist"
+  },
+  "extra": {
+    "map": [
+      [
+        "*",
+        "Webshopapps/Matrixrate"
+      ]
+    ]
   }
 }
