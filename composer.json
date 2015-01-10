@@ -12,13 +12,13 @@
       "homepage": "http://www.WebShopApps.com"
     },
     {
-      "name": "Karen Baker",
-      "email": "sales@webshopapps.com",
-      "homepage": "http://www.WebShopApps.com"
+      "name": "Karen Baker"
     }
   ],
 
   "type": "magento2-module",
+
+  "version": "0.1.0",
 
   "support": {
     "source": "https://github.com/webshopapps/mage2-matrixrate",
@@ -38,13 +38,9 @@
     }
   },
 
-  "bin": [
-    "bin/static-review.php"
-  ],
-
   "require": {
     "php": ">=5.4.0",
-    "magento/framework": "0.42.0-beta3"
+    "magento/framework": "*" // initially tested on 0.42.0-beta3
   },
 
   "require-dev": {
