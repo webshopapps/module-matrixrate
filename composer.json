@@ -40,7 +40,7 @@
 
   "require": {
     "php": ">=5.4.0",
-    "magento/framework": "*" // initially tested on 0.42.0-beta3
+    "magento/framework": "*" 
   },
 
   "require-dev": {
