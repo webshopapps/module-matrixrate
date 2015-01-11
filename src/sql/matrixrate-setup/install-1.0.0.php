@@ -89,11 +89,11 @@ $table = $installer->getConnection()->newTable(
     $installer->getIdxName(
         'shipping_tablerate',
         ['website_id', 'dest_country_id', 'dest_region_id', 'dest_zip', 'condition_name',
-            'condition_from_value','condition_to_value','delivery_type'],
+            'condition_from_value','condition_to_value','shipping_method'],
         \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE
     ),
     ['website_id', 'dest_country_id','dest_city', 'dest_region_id', 'dest_zip', 'condition_name',
-        'condition_from_value','condition_to_value','delivery_type'],
+        'condition_from_value','condition_to_value','shipping_method'],
     ['type' => \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE]
 )->setComment(
     'WebShopApps Shipping MatrixRate'

@@ -12,6 +12,7 @@ namespace Webshopapps\Matrixrate\Model\Resource\Carrier;
 
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\DirectoryList;
+use Magento\Framework\Io;
 
 class Matrixrate extends \Magento\Framework\Model\Resource\Db\AbstractDb
 {
@@ -255,15 +256,23 @@ class Matrixrate extends \Magento\Framework\Model\Resource\Db\AbstractDb
         $this->_importErrors = [];
         $this->_importedRows = 0;
 
-        $tmpDirectory = $this->_filesystem->getDirectoryRead(DirectoryList::SYS_TMP);
-        $path = $tmpDirectory->getRelativePath($csvFile);
-        $stream = $tmpDirectory->openFile($path);
+//        $tmpDirectory = $this->_filesystem->getDirectoryRead(DirectoryList::SYS_TMP);
+//        $path = $tmpDirectory->getRelativePath($csvFile);
+//        $stream = $tmpDirectory->openFile($path);
+
+        $stream     = new \Magento\Framework\Io\File();
+        $info   = pathinfo($csvFile);
+        $stream->open(array('path' => $info['dirname']));
+        $stream->streamOpen($info['basename'], 'r');
 
         // check and skip headers
-        $headers = $stream->readCsv();
+        $headers = $stream->streamReadCsv();
+
+        // check and skip headers
+       // $headers = $stream->readCsv();
         if ($headers === false || count($headers) < 5) {
             $stream->close();
-            throw new \Magento\Framework\Model\Exception(__('Please correct Table Rates File Format.'));
+            throw new \Magento\Framework\Model\Exception(__('Please correct Matrix Rates File Format.'));
         }
 
         if ($object->getData('groups/matrixrate/fields/condition_name/inherit') == '1') {

@@ -21,8 +21,8 @@
   "version": "0.1.0",
 
   "support": {
-    "source": "https://github.com/webshopapps/mage2-matrixrate",
-    "issues": "https://github.com/webshopapps/mage2-matrixrate/issues"
+    "source": "https://github.com/webshopapps/m2matrixrate",
+    "issues": "https://github.com/webshopapps/m2matrixrate/issues"
   },
 
   "autoload": {
