@@ -1,5 +1,5 @@
 {
-  "name": "webshopapps/mage2-matrixrate",
+  "name": "webshopapps/m2matrixrate",
 
   "description": "Magento Shipping Multiple Table Rates - MatrixRate",
 
@@ -39,8 +39,13 @@
   },
 
   "require": {
-    "php": ">=5.4.0",
-    "magento/framework": "*" 
+    "php": "~5.5.0|~5.6.0",
+    "magento/magento-composer-installer": "*",
+    "magento/framework": "~0.74",
+    "magento/module-store": "~0.74",
+    "magento/module-shipping": "~0.74",
+    "magento/module-quote": "~0.74",
+    "magento/module-checkout": "~0.74"
   },
 
   "require-dev": {
