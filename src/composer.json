@@ -25,11 +25,11 @@
     "issues": "https://github.com/webshopapps/m2matrixrate/issues"
   },
 
-//  "autoload": {
-//    "psr-4": {
-//      "Webshopapps\\Matrixrate\\": "app/code/Webshopapps/Matrixrate/src/"
-//    }
-//  },
+  "autoload": {
+    "psr-4": {
+      "Matrixrate\\": "src/"
+    }
+  },
 
   "autoload-dev": {
     "psr-4": {
