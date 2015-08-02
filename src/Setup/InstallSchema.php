@@ -111,11 +111,11 @@ class InstallSchema implements InstallSchemaInterface
         )->addIndex(
             $installer->getIdxName(
                 'webshopapps_matrixrate',
-                ['website_id', 'dest_country_id', 'dest_region_id', 'dest_city', 'dest_zip','dest_zip_to', 'condition_name',
+                ['website_id', 'dest_country_id', 'dest_region_id', 'dest_city', 'dest_zip', 'condition_name',
                     'condition_from_value','condition_to_value','shipping_method'],
                 \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE
             ),
-            ['website_id', 'dest_country_id', 'dest_region_id', 'dest_city', 'dest_zip','dest_zip_to', 'condition_name',
+            ['website_id', 'dest_country_id', 'dest_region_id', 'dest_city', 'dest_zip', 'condition_name',
                 'condition_from_value','condition_to_value','shipping_method'],
             ['type' => \Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE]
         )->setComment(
