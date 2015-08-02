@@ -1,8 +1,9 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Zowta Ltd, Zowta LLC (http://www.WebShopApps.com)
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
  */
-namespace Webshopapps\Matrixrate\Model\Config\Backend;
+namespace WebShopApps\MatrixRate\Model\Config\Backend;
 
 use Magento\Framework\Model\AbstractModel;
 
@@ -14,7 +15,7 @@ use Magento\Framework\Model\AbstractModel;
 class Matrixrate extends \Magento\Framework\App\Config\Value
 {
     /**
-     * @var \Webshopapps\Matrixrate\Model\Resource\Carrier\MatrixrateFactory
+     * @var \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory
      */
     protected $_matrixrateFactory;
 
@@ -22,18 +23,18 @@ class Matrixrate extends \Magento\Framework\App\Config\Value
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $config
-     * @param \Webshopapps\Matrixrate\Model\Resource\Carrier\MatrixrateFactory $matrixrateFactory
+     * @param \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory $matrixrateFactory
      * @param \Magento\Framework\Model\Resource\AbstractResource $resource
-     * @param \Magento\Framework\Data\Collection\Db $resourceCollection
+     * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\App\Config\ScopeConfigInterface $config,
-        \Webshopapps\Matrixrate\Model\Resource\Carrier\MatrixrateFactory $matrixrateFactory,
+        \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory $matrixrateFactory,
         \Magento\Framework\Model\Resource\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\Db $resourceCollection = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->_matrixrateFactory = $matrixrateFactory;
@@ -45,6 +46,8 @@ class Matrixrate extends \Magento\Framework\App\Config\Value
      */
     public function afterSave()
     {
-        $this->_matrixrateFactory->create()->uploadAndImport($this);
+        /** @var \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate $matrixRate */
+        $matrixRate = $this->_matrixrateFactory->create();
+        $matrixRate->uploadAndImport($this);
     }
 }

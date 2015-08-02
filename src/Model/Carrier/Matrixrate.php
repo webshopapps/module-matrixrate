@@ -1,8 +1,11 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Zowta Ltd, Zowta LLC (http://www.WebShopApps.com)
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
  */
-namespace Webshopapps\Matrixrate\Model\Carrier;
+namespace WebShopApps\MatrixRate\Model\Carrier;
+
+use Magento\Framework\Exception\LocalizedException;
 
 class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier implements
     \Magento\Shipping\Model\Carrier\CarrierInterface
@@ -15,7 +18,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
     /**
      * @var bool
      */
-    protected $_isFixed = true;
+    protected $_isFixed = false;
 
     /**
      * @var string
@@ -33,31 +36,34 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
     protected $_rateResultFactory;
 
     /**
-     * @var \Magento\Sales\Model\Quote\Address\RateResult\MethodFactory
+     * @var \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory
      */
     protected $_resultMethodFactory;
 
     /**
-     * @var \Webshopapps\Matrixrate\Model\Resource\Carrier\MatrixrateFactory
+     * @var \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory
      */
     protected $_matrixrateFactory;
 
+
+
     /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Sales\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory
+     * @param \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory
-     * @param \Magento\Sales\Model\Quote\Address\RateResult\MethodFactory $resultMethodFactory
-     * @param \Webshopapps\Matrixrate\Model\Resource\Carrier\MatrixrateFactory $matrixrateFactory
+     * @param \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $resultMethodFactory
+     * @param \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory $matrixrateFactory
      * @param array $data
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function __construct(
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Sales\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory,
+        \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory,
         \Psr\Log\LoggerInterface $logger,
         \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
-        \Magento\Sales\Model\Quote\Address\RateResult\MethodFactory $resultMethodFactory,
-        \Webshopapps\Matrixrate\Model\Resource\Carrier\MatrixrateFactory $matrixrateFactory,
+        \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $resultMethodFactory,
+        \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory $matrixrateFactory,
         array $data = []
     ) {
         $this->_rateResultFactory = $rateResultFactory;
@@ -70,10 +76,13 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
     }
 
     /**
-     * @param \Magento\Sales\Model\Quote\Address\RateRequest $request
+     * @param \Magento\Framework\Object $request
      * @return \Magento\Shipping\Model\Rate\Result
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function collectRates(\Magento\Sales\Model\Quote\Address\RateRequest $request)
+    public function collectRates(\Magento\Framework\Object $request)
     {
         if (!$this->getConfigFlag('active')) {
             return false;
@@ -123,9 +132,9 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
             $request->setPackageValue($oldValue - $freePackageValue);
         }
 
-        if (!$request->getConditionName()) {
+        if (!$request->getConditionMRName()) {
             $conditionName = $this->getConfigData('condition_name');
-            $request->setConditionName($conditionName ? $conditionName : $this->_defaultConditionName);
+            $request->setConditionMRName($conditionName ? $conditionName : $this->_defaultConditionName);
         }
 
         // Package weight and qty free shipping
@@ -137,33 +146,40 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
 
         /** @var \Magento\Shipping\Model\Rate\Result $result */
         $result = $this->_rateResultFactory->create();
-        $rate = $this->getRate($request);
+        $rateArray = $this->getRate($request);
 
         $request->setPackageWeight($oldWeight);
         $request->setPackageQty($oldQty);
 
-        if (!empty($rate) && $rate['price'] >= 0) {
-            /** @var \Magento\Sales\Model\Quote\Address\RateResult\Method $method */
-            $method = $this->_resultMethodFactory->create();
+        $foundRates = false;
 
-            $method->setCarrier('matrixrate');
-            $method->setCarrierTitle($this->getConfigData('title'));
+        foreach ($rateArray as $rate) {
+            if (!empty($rate) && $rate['price'] >= 0) {
+                /** @var \Magento\Quote\Model\Quote\Address\RateResult\Method $method */
+                $method = $this->_resultMethodFactory->create();
 
-            $method->setMethod('todo');
-            $method->setMethodTitle($this->getConfigData('name'));
+                $method->setCarrier('matrixrate');
+                $method->setCarrierTitle($this->getConfigData('title'));
 
-            if ($request->getFreeShipping() === true || $request->getPackageQty() == $freeQty) {
-                $shippingPrice = 0;
-            } else {
-                $shippingPrice = $this->getFinalPriceWithHandlingFee($rate['price']);
+                $method->setMethod('matrixrate_' . $rate['pk']);
+                $method->setMethodTitle(__($rate['shipping_method']));
+
+                if ($request->getFreeShipping() === true || $request->getPackageQty() == $freeQty) {
+                    $shippingPrice = 0;
+                } else {
+                    $shippingPrice = $this->getFinalPriceWithHandlingFee($rate['price']);
+                }
+
+                $method->setPrice($shippingPrice);
+                $method->setCost($rate['cost']);
+
+                $result->append($method);
+                $foundRates = true; // have found some valid rates
             }
+        }
 
-            $method->setPrice($shippingPrice);
-            $method->setCost($rate['cost']);
-
-            $result->append($method);
-        } else {
-            /** @var \Magento\Sales\Model\Quote\Address\RateResult\Error $error */
+        if (!$foundRates){
+            /** @var \Magento\Quote\Model\Quote\Address\RateResult\Error $error */
             $error = $this->_rateErrorFactory->create(
                 [
                     'data' => [
@@ -180,10 +196,10 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
     }
 
     /**
-     * @param \Magento\Sales\Model\Quote\Address\RateRequest $request
+     * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
      * @return array|bool
      */
-    public function getRate(\Magento\Sales\Model\Quote\Address\RateRequest $request)
+    public function getRate(\Magento\Quote\Model\Quote\Address\RateRequest $request)
     {
         return $this->_matrixrateFactory->create()->getRate($request);
     }
@@ -192,25 +208,25 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
      * @param string $type
      * @param string $code
      * @return array
-     * @throws \Magento\Shipping\Exception
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getCode($type, $code = '')
     {
         $codes = [
             'condition_name' => [
                 'package_weight' => __('Weight vs. Destination'),
-                'package_value' => __('Price vs. Destination'),
+                'package_value' => __('Order Subtotal vs. Destination'),
                 'package_qty' => __('# of Items vs. Destination'),
             ],
             'condition_name_short' => [
-                'package_weight' => __('Weight (and above)'),
-                'package_value' => __('Order Subtotal (and above)'),
-                'package_qty' => __('# of Items (and above)'),
+                'package_weight' => __('Weight'),
+                'package_value' => __('Order Subtotal'),
+                'package_qty' => __('# of Items'),
             ],
         ];
 
         if (!isset($codes[$type])) {
-            throw new \Magento\Shipping\Exception(__('Please correct Matrix Rate code type: %1.', $type));
+            throw new LocalizedException(__('Please correct Matrix Rate code type: %1.', $type));
         }
 
         if ('' === $code) {
@@ -218,7 +234,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
         }
 
         if (!isset($codes[$type][$code])) {
-            throw new \Magento\Shipping\Exception(__('Please correct Matrix Rate code for type %1: %2.', $type, $code));
+            throw new LocalizedException(__('Please correct Matrix Rate code for type %1: %2.', $type, $code));
         }
 
         return $codes[$type][$code];

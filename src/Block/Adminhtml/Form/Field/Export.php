@@ -1,11 +1,12 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Zowta Ltd, Zowta LLC (http://www.WebShopApps.com)
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
  */
-namespace Webshopapps\Matrixrate\Block\Adminhtml\Form\Field;
+namespace WebShopApps\MatrixRate\Block\Adminhtml\Form\Field;
 
 /**
- * Export CSV button for shipping matrix rates
+ * Export CSV button for shipping table rates
  *
  * @author     Magento Core Team <core@magentocommerce.com>
  */

@@ -1,85 +1,79 @@
 <?xml version="1.0"?>
 <!--
 /**
- * @copyright Copyright (c) 2014 Zowta Ltd, Zowta LLC (http://www.WebShopApps.com)
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
  */
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/system_file.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
     <system>
-        <section id="carriers" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="carriers">
             <group id="matrixrate" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>WebShopApps Matrix Rates</label>
+                <label>WebShopApps Matrix Rate</label>
                 <comment>
                     <![CDATA[
 				<div style="padding:10px;background-color:#fff;border:1px solid #ddd;margin-bottom:7px;">
 				This module was developed by <a href="http://www.webshopapps.com" target="_blank">www.WebShopApps.com</a> - <b>Magento Shipping Extension Specialists</b>.
 				<br/>For docs & examples refer to the WebShopApps <a href="http://support.webshopapps.com/matrixrate/">knowledge base</a>.
-				<br/>We offer <a href="http://www.webshopapps.com/premium-matrixrate-shipping-extension.html"  target="_blank">Premium Matrixrate</a> for our commercial users, masses of 					features to reduce maintenance time. Please use this 20% discount when upgrading to the <a href="http://www.webshopapps.com/premium-matrixrate-shipping-extension.html"  					target="_blank">Premium Matrixrate</a> extension <b>20PREMMXQBX</b>
-				<br/>We have the largest selections of  <a href="http://www.webshopapps.com" target="_blank">shipping extensions</a> on Magento.</a>
 				</div>
 			  ]]>
                 </comment>
-                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled</label>
-                    <source_model>Magento\Backend\Model\Config\Source\Yesno</source_model>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Title</label>
                 </field>
-                <field id="condition_name" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="condition_name" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Condition</label>
-                    <source_model>Webshopapps\Matrixrate\Model\Config\Source\Matrixrate</source_model>
-                    <comment>Filter prices based on destination AND weight, price or quantity</comment>
-                    <tooltip>
-                        Once you change this and save you must re-import csv for it to take effect.
-                    </tooltip>
+                    <source_model>WebShopApps\MatrixRate\Model\Config\Source\Matrixrate</source_model>
                 </field>
-                <field id="export" translate="label" type="Webshopapps\Matrixrate\Block\Adminhtml\Form\Field\Export" sortOrder="50" showInDefault="0" showInWebsite="1" showInStore="0">
+                <field id="include_virtual_price" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Include Virtual Products in Price Calculation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="export" translate="label" type="WebShopApps\MatrixRate\Block\Adminhtml\Form\Field\Export" sortOrder="5" showInDefault="0" showInWebsite="1" showInStore="0">
                     <label>Export</label>
                 </field>
-                <field id="import" translate="label" type="Webshopapps\Matrixrate\Block\Adminhtml\Form\Field\Import" sortOrder="60" showInDefault="0" showInWebsite="1" showInStore="0">
+                <field id="import" translate="label" type="WebShopApps\MatrixRate\Block\Adminhtml\Form\Field\Import" sortOrder="6" showInDefault="0" showInWebsite="1" showInStore="0">
                     <label>Import</label>
-                    <backend_model>Webshopapps\Matrixrate\Model\Config\Backend\Matrixrate</backend_model>
+                    <backend_model>WebShopApps\MatrixRate\Model\Config\Backend\Matrixrate</backend_model>
                 </field>
-                <field id="zip_range" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Use Numeric Zipcode Ranges</label>
-                    <source_model>Magento\Backend\Model\Config\Source\Yesno</source_model>
-                    <comment>You should only set this to Yes if you use purely numeric zipcodes (e.g. USA/AUS clients)</comment>
-                </field>
-                <field id="include_virtual_price" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Include Virtual Products in Price Calculation</label>
-                    <source_model>Magento\Backend\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="handling_type" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+
+
+                <field id="handling_type" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Calculate Handling Fee</label>
                     <source_model>Magento\Shipping\Model\Source\HandlingType</source_model>
                 </field>
-                <field id="handling_fee" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="handling_fee" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Handling Fee</label>
                     <validate>validate-number validate-zero-or-greater</validate>
                 </field>
 
-                <field id="sallowspecific" translate="label" type="select" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="sallowspecific" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Ship to Applicable Countries</label>
                     <frontend_class>shipping-applicable-country</frontend_class>
                     <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
                 </field>
-                <field id="specificcountry" translate="label" type="multiselect" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="91" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Ship to Specific Countries</label>
                     <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
                     <can_be_empty>1</can_be_empty>
                 </field>
-                <field id="showmethod" translate="label" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="showmethod" translate="label" type="select" sortOrder="92" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Show Method if Not Applicable</label>
                     <frontend_class>shipping-skip-hide</frontend_class>
-                    <source_model>Magento\Backend\Model\Config\Source\Yesno</source_model>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="specificerrmsg" translate="label" type="textarea" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="specificerrmsg" translate="label" type="textarea" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Displayed Error Message</label>
                 </field>
-                <field id="sort_order" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="0">
+
+                <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Sort Order</label>
                 </field>
+
             </group>
         </section>
     </system>

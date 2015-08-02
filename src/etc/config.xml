@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <!--
 /**
- * @copyright Copyright (c) 2014 Zowta Ltd, Zowta LLC (http://www.WebShopApps.com)
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
  */
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Core/etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Store/etc/config.xsd">
     <default>
         <carriers>
             <matrixrate>
@@ -12,7 +13,7 @@
                 <sallowspecific>0</sallowspecific>
                 <condition_name>package_weight</condition_name>
                 <include_virtual_price>1</include_virtual_price>
-                <model>Magento\OfflineShipping\Model\Carrier\Matrixrate</model>
+                <model>WebShopApps\MatrixRate\Model\Carrier\Matrixrate</model>
                 <name>Matrix Rate</name>
                 <title>Select Shipping Method</title>
                 <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>

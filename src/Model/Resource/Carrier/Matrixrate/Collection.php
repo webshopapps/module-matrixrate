@@ -1,8 +1,9 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Zowta Ltd, Zowta LLC (http://www.WebShopApps.com)
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
  */
-namespace Webshopapps\Matrixrate\Model\Resource\Carrier\Matrixrate;
+namespace WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate;
 
 /**
  * Shipping table rates collection
@@ -33,8 +34,8 @@ class Collection extends \Magento\Framework\Model\Resource\Db\Collection\Abstrac
     protected function _construct()
     {
         $this->_init(
-            'Webshopapps\Matrixrate\Model\Carrier\Matrixrate',
-            'Webshopapps\Matrixrate\Model\Resource\Carrier\Matrixrate'
+            'WebShopApps\MatrixRate\Model\Carrier\Matrixrate',
+            'WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate'
         );
         $this->_countryTable = $this->getTable('directory_country');
         $this->_regionTable = $this->getTable('directory_country_region');
@@ -69,7 +70,7 @@ class Collection extends \Magento\Framework\Model\Resource\Db\Collection\Abstrac
      * Add website filter to collection
      *
      * @param int $websiteId
-     * @return \Webshopapps\Matrixrate\Model\Resource\Carrier\Matrixrate\Collection
+     * @return \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\Collection
      */
     public function setWebsiteFilter($websiteId)
     {
@@ -80,7 +81,7 @@ class Collection extends \Magento\Framework\Model\Resource\Db\Collection\Abstrac
      * Add condition name (code) filter to collection
      *
      * @param string $conditionName
-     * @return \Webshopapps\Matrixrate\Model\Resource\Carrier\Matrixrate\Collection
+     * @return \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\Collection
      */
     public function setConditionFilter($conditionName)
     {
@@ -91,7 +92,7 @@ class Collection extends \Magento\Framework\Model\Resource\Db\Collection\Abstrac
      * Add country filter to collection
      *
      * @param string $countryId
-     * @return \Webshopapps\Matrixrate\Model\Resource\Carrier\Matrixrate\Collection
+     * @return \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\Collection
      */
     public function setCountryFilter($countryId)
     {

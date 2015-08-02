@@ -1,11 +1,12 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Zowta Ltd, Zowta LLC (http://www.WebShopApps.com)
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
  */
-namespace Webshopapps\Matrixrate\Block\Adminhtml\Form\Field;
+namespace WebShopApps\MatrixRate\Block\Adminhtml\Form\Field;
 
 /**
- * Custom import CSV file field for shipping matrix rates
+ * Custom import CSV file field for shipping table rates
  *
  * @author     Magento Core Team <core@magentocommerce.com>
  */
@@ -32,7 +33,8 @@ class Import extends \Magento\Framework\Data\Form\Element\AbstractElement
         $html .= '<input id="time_condition" type="hidden" name="' . $this->getName() . '" value="' . time() . '" />';
 
         $html .= <<<EndHTML
-        <script type="text/javascript">
+        <script>
+        require(['prototype'], function(){
         Event.observe($('carriers_matrixrate_condition_name'), 'change', checkConditionName.bind(this));
         function checkConditionName(event)
         {
@@ -41,6 +43,7 @@ class Import extends \Magento\Framework\Data\Form\Element\AbstractElement
                 $('time_condition').value = '_' + conditionNameElement.value + '/' + Math.random();
             }
         }
+        });
         </script>
 EndHTML;
 

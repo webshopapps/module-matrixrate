@@ -1,70 +1,33 @@
 {
-  "name": "webshopapps/mage2-matrixrate",
-
-  "description": "Magento Shipping Multiple Table Rates - MatrixRate",
-
-  "license": "OSL",
-
-  "authors": [
-    {
-      "name": "WebShopApps",
-      "email": "sales@webshopapps.com",
-      "homepage": "http://www.WebShopApps.com"
+    "name": "magento/module-offline-shipping",
+    "description": "N/A",
+    "require": {
+        "php": "~5.5.0|~5.6.0",
+        "magento/module-config": "1.0.0-beta",
+        "magento/module-store": "1.0.0-beta",
+        "magento/module-backend": "1.0.0-beta",
+        "magento/module-shipping": "1.0.0-beta",
+        "magento/module-catalog": "1.0.0-beta",
+        "magento/module-sales": "1.0.0-beta",
+        "magento/module-sales-rule": "1.0.0-beta",
+        "magento/module-directory": "1.0.0-beta",
+        "magento/module-checkout": "1.0.0-beta",
+        "magento/module-quote": "1.0.0-beta",
+        "magento/framework": "1.0.0-beta",
+        "magento/magento-composer-installer": "*"
     },
-    {
-      "name": "Karen Baker"
+    "type": "magento2-module",
+    "version": "1.0.0-beta",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "extra": {
+        "map": [
+            [
+                "*",
+                "Magento/MatrixRate"
+            ]
+        ]
     }
-  ],
-
-  "type": "magento2-module",
-
-  "version": "0.1.0",
-
-  "support": {
-    "source": "https://github.com/webshopapps/m2matrixrate",
-    "issues": "https://github.com/webshopapps/m2matrixrate/issues"
-  },
-
-  "autoload": {
-    "psr-4": {
-      "Matrixrate\\": "src/"
-    }
-  },
-
-  "autoload-dev": {
-    "psr-4": {
-      "Matrixrate\\Test\\Unit\\": "tests/unit/",
-      "Matrixrate\\Test\\Functional\\": "tests/functional/"
-    }
-  },
-
-  "require": {
-    "php": ">=5.4.0",
-    "magento/framework": "*" 
-  },
-
-  "require-dev": {
-    "mockery/mockery": "~0.9",
-    "phpunit/phpunit": "~4.0",
-    "sensiolabs/security-checker": "~2.0",
-    "squizlabs/php_codesniffer": "~1.0"
-  },
-
-  "suggest": {
-    "sensiolabs/security-checker": "Required for ComposerSecurityReview.",
-    "squizlabs/php_codesniffer":   "Required for PhpCodeSnifferReview."
-  },
-
-  "config": {
-    "optimize-autoloader": true,
-    "preferred-install": "dist"
-  },
-  "extra": {
-    "map": [
-      [
-        "*",
-        "Webshopapps/Matrixrate"
-      ]
-    ]
-  }
 }

@@ -1,20 +1,21 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Zowta Ltd, Zowta LLC (http://www.WebShopApps.com)
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
  */
-namespace Webshopapps\Matrixrate\Model\Config\Source;
+namespace WebShopApps\MatrixRate\Model\Config\Source;
 
 class Matrixrate implements \Magento\Framework\Option\ArrayInterface
 {
     /**
-     * @var \Webshopapps\Matrixrate\Model\Carrier\Matrixrate
+     * @var \WebShopApps\MatrixRate\Model\Carrier\Matrixrate
      */
     protected $_carrierMatrixrate;
 
     /**
-     * @param \Webshopapps\Matrixrate\Model\Carrier\Matrixrate $carrierMatrixrate
+     * @param \WebShopApps\MatrixRate\Model\Carrier\Matrixrate $carrierMatrixrate
      */
-    public function __construct(\Webshopapps\Matrixrate\Model\Carrier\Matrixrate $carrierMatrixrate)
+    public function __construct(\WebShopApps\MatrixRate\Model\Carrier\Matrixrate $carrierMatrixrate)
     {
         $this->_carrierMatrixrate = $carrierMatrixrate;
     }

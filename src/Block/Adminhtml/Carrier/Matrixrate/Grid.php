@@ -1,8 +1,9 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Zowta Ltd, Zowta LLC (http://www.WebShopApps.com)
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
  */
-namespace Webshopapps\Matrixrate\Block\Adminhtml\Carrier\Matrixrate;
+namespace WebShopApps\MatrixRate\Block\Adminhtml\Carrier\Matrixrate;
 
 /**
  * Shipping carrier table rate grid block
@@ -27,27 +28,27 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected $_conditionName;
 
     /**
-     * @var \Webshopapps\Matrixrate\Model\Carrier\Matrixrate
+     * @var \WebShopApps\MatrixRate\Model\Carrier\Matrixrate
      */
     protected $_matrixrate;
 
     /**
-     * @var \Webshopapps\Matrixrate\Model\Resource\Carrier\Matrixrate\CollectionFactory
+     * @var \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\CollectionFactory
      */
     protected $_collectionFactory;
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Backend\Helper\Data $backendHelper
-     * @param \Webshopapps\Matrixrate\Model\Resource\Carrier\Matrixrate\CollectionFactory $collectionFactory
-     * @param \Webshopapps\Matrixrate\Model\Carrier\Matrixrate $matrixrate
+     * @param \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\CollectionFactory $collectionFactory
+     * @param \WebShopApps\MatrixRate\Model\Carrier\Matrixrate $matrixrate
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Backend\Helper\Data $backendHelper,
-        \Webshopapps\Matrixrate\Model\Resource\Carrier\Matrixrate\CollectionFactory $collectionFactory,
-        \Webshopapps\Matrixrate\Model\Carrier\Matrixrate $matrixrate,
+        \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\CollectionFactory $collectionFactory,
+        \WebShopApps\MatrixRate\Model\Carrier\Matrixrate $matrixrate,
         array $data = []
     ) {
         $this->_collectionFactory = $collectionFactory;
@@ -86,7 +87,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getWebsiteId()
     {
-        if (is_null($this->_websiteId)) {
+        if ($this->_websiteId === null) {
             $this->_websiteId = $this->_storeManager->getWebsite()->getId();
         }
         return $this->_websiteId;
@@ -117,11 +118,11 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     /**
      * Prepare shipping table rate collection
      *
-     * @return \Webshopapps\Matrixrate\Block\Adminhtml\Carrier\Matrixrate\Grid
+     * @return \WebShopApps\MatrixRate\Block\Adminhtml\Carrier\Matrixrate\Grid
      */
     protected function _prepareCollection()
     {
-        /** @var $collection \Webshopapps\Matrixrate\Model\Resource\Carrier\Matrixrate\Collection */
+        /** @var $collection \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\Collection */
         $collection = $this->_collectionFactory->create();
         $collection->setConditionFilter($this->getConditionName())->setWebsiteFilter($this->getWebsiteId());
 
@@ -137,56 +138,44 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareColumns()
     {
+        $this->addColumn(
+            'dest_country',
+            ['header' => __('Country'), 'index' => 'dest_country', 'default' => '*']
+        );
 
-        $this->addColumn('dest_country', array(
-            'header'    => __('Country'),
-            'index'     => 'dest_country',
-            'default'   => '*',
-        ));
+        $this->addColumn(
+            'dest_region',
+            ['header' => __('Region/State'), 'index' => 'dest_region', 'default' => '*']
+        );
 
-        $this->addColumn('dest_region', array(
-            'header'    => __('Region/State'),
-            'index'     => 'dest_region',
-            'default'   => '*',
-        ));
+        $this->addColumn(
+            'dest_zip',
+            ['header' => __('Zip/Postal Code'), 'index' => 'dest_zip', 'default' => '*']
+        );
+        $this->addColumn(
+            'dest_city',
+            ['header' => __('City'), 'index' => 'dest_city', 'default' => '*']
+        );
 
-        $this->addColumn('dest_city', array(
-            'header'    => __('City'),
-            'index'     => 'dest_city',
-            'default'   => '*',
-        ));
-
-        $this->addColumn('dest_zip', array(
-            'header'    => __('Zip/Postal Code From'),
-            'index'     => 'dest_zip',
-        ));
-
-        $this->addColumn('dest_zip_to', array(
-            'header'    => __('Zip/Postal Code To'),
-            'index'     => 'dest_zip_to',
-        ));
 
         $label = $this->_matrixrate->getCode('condition_name_short', $this->getConditionName());
 
-        $this->addColumn('condition_from_value', array(
-            'header'    => $label.' From',
-            'index'     => 'condition_from_value',
-        ));
+        $this->addColumn(
+            'condition_from_value',
+            ['header' => $label.__('>'), 'index' => 'condition_from_value']
+        );
 
-        $this->addColumn('condition_to_value', array(
-            'header'    => $label.' To',
-            'index'     => 'condition_to_value',
-        ));
+        $this->addColumn(
+            'condition_to_value',
+            ['header' => $label.__('<='), 'index' => 'condition_to_value']
+        );
 
-        $this->addColumn('price', array(
-            'header'    => __('Shipping Price'),
-            'index'     => 'price',
-        ));
+        $this->addColumn('price', ['header' => __('Shipping Price'), 'index' => 'price']);
 
-        $this->addColumn('delivery_type', array(
-            'header'    => __('Delivery Type'),
-            'index'     => 'delivery_type',
-        ));
+        $this->addColumn(
+            'shipping_method',
+            ['header' => __('Shipping Method'), 'index' => 'shipping_method']
+        );
 
         return parent::_prepareColumns();
     }
