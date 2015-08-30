@@ -190,7 +190,7 @@ class Matrixrate extends \Magento\Framework\Model\Resource\Db\AbstractDb
             $bind=array();
             switch($j) {
                 case 0: // country, region, city, postcode
-                   $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND dest_city = :city AND dest_zip = :postcode";  // TODO Add city
+                   $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 AND dest_zip = :postcode";  // TODO Add city
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':region_id' => (int)$request->getDestRegionId(),
@@ -207,7 +207,7 @@ class Matrixrate extends \Magento\Framework\Model\Resource\Db\AbstractDb
                     ];
                     break;
                 case 2: // country, state, city, no postcode
-                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND dest_city = :city AND dest_zip ='*'"; // TODO Add city search
+                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 AND dest_zip ='*'"; // TODO Add city search
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':region_id' => (int)$request->getDestRegionId(),
@@ -215,7 +215,7 @@ class Matrixrate extends \Magento\Framework\Model\Resource\Db\AbstractDb
                     ];
                     break;
                 case 3: //country, city, no region, no postcode
-                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = '0' AND dest_city = :city AND dest_zip ='*'"; // TODO Add city
+                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = '0' AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 AND dest_zip ='*'"; // TODO Add city
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':city' => $request->getDestCity(),
