@@ -67,11 +67,11 @@ class InstallSchema implements InstallSchemaInterface
             ['nullable' => false, 'default' => '*'],
             'Destination Post Code (Zip)'
         )->addColumn(
-            'dest_zip',
+            'dest_zip_to',
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
             10,
             ['nullable' => false, 'default' => '*'],
-            'Destination Post Code (Zip)'
+            'Destination Post Code To (Zip)'
         )->addColumn(
             'condition_name',
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,

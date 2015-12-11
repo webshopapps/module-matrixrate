@@ -4,6 +4,7 @@
  * See COPYING.txt for license details.
  */
 namespace WebShopApps\MatrixRate\Test\Unit\Model\Config\Source;
+use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 
 class MatrixrateTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,6 +18,9 @@ class MatrixrateTest extends \PHPUnit_Framework_TestCase
      */
     protected $carrierMatrixrateMock;
 
+    /** @var ObjectManagerHelper */
+    protected $objectManagerHelper;
+
     protected function setUp()
     {
         $this->carrierMatrixrateMock = $this->getMockBuilder('\WebShopApps\MatrixRate\Model\Carrier\Matrixrate')
@@ -24,8 +28,9 @@ class MatrixrateTest extends \PHPUnit_Framework_TestCase
             ->setMethods(['getCode'])
             ->getMock();
 
-        $helper = new \Magento\Framework\TestFramework\Unit\Helper\ObjectManager($this);
-        $this->model = $helper->getObject('WebShopApps\MatrixRate\Model\Config\Source\Matrixrate', [
+        $this->objectManagerHelper = new ObjectManagerHelper($this);
+
+        $this->model = $this->objectManagerHelper->getObject('WebShopApps\MatrixRate\Model\Config\Source\Matrixrate', [
             'carrierMatrixrate' => $this->carrierMatrixrateMock
         ]);
     }

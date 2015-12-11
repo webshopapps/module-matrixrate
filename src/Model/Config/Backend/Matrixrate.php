@@ -15,7 +15,7 @@ use Magento\Framework\Model\AbstractModel;
 class Matrixrate extends \Magento\Framework\App\Config\Value
 {
     /**
-     * @var \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory
+     * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory
      */
     protected $_matrixrateFactory;
 
@@ -23,8 +23,9 @@ class Matrixrate extends \Magento\Framework\App\Config\Value
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $config
-     * @param \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory $matrixrateFactory
-     * @param \Magento\Framework\Model\Resource\AbstractResource $resource
+     * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
+     * @param \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory $matrixrateFactory
+     * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
      * @param array $data
      */
@@ -32,13 +33,14 @@ class Matrixrate extends \Magento\Framework\App\Config\Value
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\App\Config\ScopeConfigInterface $config,
-        \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory $matrixrateFactory,
-        \Magento\Framework\Model\Resource\AbstractResource $resource = null,
+        \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
+        \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory $matrixrateFactory,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->_matrixrateFactory = $matrixrateFactory;
-        parent::__construct($context, $registry, $config, $resource, $resourceCollection, $data);
+        parent::__construct($context, $registry, $config, $cacheTypeList, $resource, $resourceCollection, $data);
     }
 
     /**
@@ -46,7 +48,7 @@ class Matrixrate extends \Magento\Framework\App\Config\Value
      */
     public function afterSave()
     {
-        /** @var \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate $matrixRate */
+        /** @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate $matrixRate */
         $matrixRate = $this->_matrixrateFactory->create();
         $matrixRate->uploadAndImport($this);
     }

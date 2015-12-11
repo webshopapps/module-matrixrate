@@ -3,7 +3,9 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace WebShopApps\MatrixRate\Test\Unit\Block\Adminhtml\Carrier\Matrixrate;
+use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 
 class GridTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,15 +39,18 @@ class GridTest extends \PHPUnit_Framework_TestCase
      */
     protected $collectionFactoryMock;
 
+    /** @var ObjectManagerHelper */
+    protected $objectManagerHelper;
+
     protected function setUp()
     {
-        $objectManager = new \Magento\Framework\TestFramework\Unit\Helper\ObjectManager($this);
+        $this->objectManagerHelper = new ObjectManagerHelper($this);
 
         $this->storeManagerMock = $this->getMockBuilder('Magento\Store\Model\StoreManagerInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->context = $objectManager->getObject('Magento\Backend\Block\Template\Context', [
+        $this->context = $this->objectManagerHelper->getObject('Magento\Backend\Block\Template\Context', [
             'storeManager' => $this->storeManagerMock
         ]);
 
@@ -54,7 +59,7 @@ class GridTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->collectionFactoryMock =
-            $this->getMockBuilder('\WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\CollectionFactory')
+            $this->getMockBuilder('\WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate\CollectionFactory')
             ->disableOriginalConstructor()
             ->getMock();
 

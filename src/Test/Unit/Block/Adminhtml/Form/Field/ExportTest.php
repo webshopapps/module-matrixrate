@@ -4,6 +4,7 @@
  * See COPYING.txt for license details.
  */
 namespace WebShopApps\MatrixRate\Test\Unit\Block\Adminhtml\Form\Field;
+use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 
 class ExportTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,13 +13,18 @@ class ExportTest extends \PHPUnit_Framework_TestCase
      */
     protected $_object;
 
+    /** @var ObjectManagerHelper */
+    protected $objectManagerHelper;
+
     protected function setUp()
     {
         $backendUrl = $this->getMock('Magento\Backend\Model\UrlInterface', [], [], '', false, false);
         $backendUrl->expects($this->once())->method('getUrl')->with("*/*/exportMatrixrates", ['website' => 1]);
 
-        $objectManager = new \Magento\Framework\TestFramework\Unit\Helper\ObjectManager($this);
-        $this->_object = $objectManager->getObject(
+       // $objectManager = new \Magento\Framework\TestFramework\Unit\Helper\ObjectManager($this);
+        $this->objectManagerHelper = new ObjectManagerHelper($this);
+
+        $this->_object = $this->objectManagerHelper->getObject(
             'WebShopApps\MatrixRate\Block\Adminhtml\Form\Field\Export',
             ['backendUrl' => $backendUrl]
         );

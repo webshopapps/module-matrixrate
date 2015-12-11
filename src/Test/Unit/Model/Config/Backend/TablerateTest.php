@@ -4,6 +4,7 @@
  * See COPYING.txt for license details.
  */
 namespace WebShopApps\MatrixRate\Test\Unit\Model\Config\Backend;
+use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 
 class MatrixrateTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,27 +14,31 @@ class MatrixrateTest extends \PHPUnit_Framework_TestCase
     protected $model;
 
     /**
-     * @var \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory|\PHPUnit_Framework_MockObject_MockObject
+     * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $tableateFactoryMock;
 
+    /** @var ObjectManagerHelper */
+    protected $objectManagerHelper;
+
     protected function setUp()
     {
+        $this->objectManagerHelper = new ObjectManagerHelper($this);
+
         $this->tableateFactoryMock =
-            $this->getMockBuilder('WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory')
+            $this->getMockBuilder('WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory')
             ->disableOriginalConstructor()
             ->setMethods(['create'])
             ->getMock();
 
-        $helper = new \Magento\Framework\TestFramework\Unit\Helper\ObjectManager($this);
-        $this->model = $helper->getObject('\WebShopApps\MatrixRate\Model\Config\Backend\Matrixrate', [
+        $this->model = $this->objectManagerHelper->getObject('\WebShopApps\MatrixRate\Model\Config\Backend\Matrixrate', [
             'matrixrateFactory' => $this->tableateFactoryMock
         ]);
     }
 
     public function testAfterSave()
     {
-        $matrixrateMock = $this->getMockBuilder('WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate')
+        $matrixrateMock = $this->getMockBuilder('WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate')
             ->disableOriginalConstructor()
             ->setMethods(['uploadAndImport'])
             ->getMock();

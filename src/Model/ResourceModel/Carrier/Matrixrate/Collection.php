@@ -3,14 +3,14 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate;
+namespace WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate;
 
 /**
  * Shipping table rates collection
  *
  * @author     Magento Core Team <core@magentocommerce.com>
  */
-class Collection extends \Magento\Framework\Model\Resource\Db\Collection\AbstractCollection
+class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**
      * Directory/country table name
@@ -35,7 +35,7 @@ class Collection extends \Magento\Framework\Model\Resource\Db\Collection\Abstrac
     {
         $this->_init(
             'WebShopApps\MatrixRate\Model\Carrier\Matrixrate',
-            'WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate'
+            'WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate'
         );
         $this->_countryTable = $this->getTable('directory_country');
         $this->_regionTable = $this->getTable('directory_country_region');
@@ -70,7 +70,7 @@ class Collection extends \Magento\Framework\Model\Resource\Db\Collection\Abstrac
      * Add website filter to collection
      *
      * @param int $websiteId
-     * @return \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\Collection
+     * @return \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate\Collection
      */
     public function setWebsiteFilter($websiteId)
     {
@@ -81,7 +81,7 @@ class Collection extends \Magento\Framework\Model\Resource\Db\Collection\Abstrac
      * Add condition name (code) filter to collection
      *
      * @param string $conditionName
-     * @return \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\Collection
+     * @return \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate\Collection
      */
     public function setConditionFilter($conditionName)
     {
@@ -92,7 +92,7 @@ class Collection extends \Magento\Framework\Model\Resource\Db\Collection\Abstrac
      * Add country filter to collection
      *
      * @param string $countryId
-     * @return \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\Collection
+     * @return \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate\Collection
      */
     public function setCountryFilter($countryId)
     {

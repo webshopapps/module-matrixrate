@@ -33,21 +33,21 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected $_matrixrate;
 
     /**
-     * @var \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\CollectionFactory
+     * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate\CollectionFactory
      */
     protected $_collectionFactory;
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Backend\Helper\Data $backendHelper
-     * @param \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\CollectionFactory $collectionFactory
+     * @param \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate\CollectionFactory $collectionFactory
      * @param \WebShopApps\MatrixRate\Model\Carrier\Matrixrate $matrixrate
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Backend\Helper\Data $backendHelper,
-        \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\CollectionFactory $collectionFactory,
+        \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate\CollectionFactory $collectionFactory,
         \WebShopApps\MatrixRate\Model\Carrier\Matrixrate $matrixrate,
         array $data = []
     ) {
@@ -122,7 +122,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareCollection()
     {
-        /** @var $collection \WebShopApps\MatrixRate\Model\Resource\Carrier\Matrixrate\Collection */
+        /** @var $collection \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate\Collection */
         $collection = $this->_collectionFactory->create();
         $collection->setConditionFilter($this->getConditionName())->setWebsiteFilter($this->getWebsiteId());
 

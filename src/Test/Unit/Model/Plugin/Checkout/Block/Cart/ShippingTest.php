@@ -4,6 +4,7 @@
  * See COPYING.txt for license details.
  */
 namespace WebShopApps\MatrixRate\Test\Unit\Model\Plugin\Checkout\Block\Cart;
+use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 
 class ShippingTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,7 +20,7 @@ class ShippingTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $helper = new \Magento\Framework\TestFramework\Unit\Helper\ObjectManager($this);
+        $this->objectManagerHelper = new ObjectManagerHelper($this);
 
         $this->scopeConfigMock = $this->getMockBuilder('\Magento\Framework\App\Config\ScopeConfigInterface')
             ->disableOriginalConstructor()
@@ -29,7 +30,7 @@ class ShippingTest extends \PHPUnit_Framework_TestCase
             ])
             ->getMock();
 
-        $this->model = $helper->getObject('\WebShopApps\MatrixRate\Model\Plugin\Checkout\Block\Cart\Shipping', [
+        $this->model = $this->objectManagerHelper->getObject('\WebShopApps\MatrixRate\Model\Plugin\Checkout\Block\Cart\Shipping', [
             'scopeConfig' => $this->scopeConfigMock
         ]);
     }

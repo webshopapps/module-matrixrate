@@ -42,7 +42,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
     protected $_resultMethodFactory;
 
     /**
-     * @var \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory
+     * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory
      */
     protected $_matrixrateFactory;
 
@@ -54,7 +54,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory
      * @param \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $resultMethodFactory
-     * @param \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory $matrixrateFactory
+     * @param \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory $matrixrateFactory
      * @param array $data
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
@@ -64,7 +64,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
         \Psr\Log\LoggerInterface $logger,
         \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
         \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $resultMethodFactory,
-        \WebShopApps\MatrixRate\Model\Resource\Carrier\MatrixrateFactory $matrixrateFactory,
+        \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory $matrixrateFactory,
         array $data = []
     ) {
         $this->_rateResultFactory = $rateResultFactory;
