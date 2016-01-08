@@ -1,4 +1,4 @@
-# WebShopApps MatrixRate
+# ShipperHQ and WebShopApps MatrixRate
 
 A Shipping Rate module for Magento 2.x which supports showing multiple shipping methods.  This is based on the Magento Tablerate module and is managed via a csv file.
 
@@ -15,24 +15,24 @@ You also need to specify the repository:
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/webshopapps/mage2-matrixrate.git"
+            "url": "https://github.com/webshopapps/m2ShipperHQ.git"
         }
     ]
 
 You can now install the module via `composer update` from the root directory.
 
 Finally you need to get the actual module loaded within Magento itself. In Magento 1.x you add a file to app/etc/modules.
-  In Magento 2.x you just add this to `app/etc/config.php`:
-  
-    'Webshopapps_Matrixrate' => 1,
+  In Magento 2.x run the following command for each module you wish to enable
+  php -f bin/magento module:enable --clear-static-content Module_Name
+  php -f bin/magento setup:upgrade
 
 
 ## Resources
 * [View Source on GitHub][code]
 * [Report Issues on GitHub][issues]
 
-[code]: https://github.com/webshopapps/mage2-matrixrate
-[issues]: https://github.com/webshopapps/mage2-matrixrate/issues
+[code]: https://github.com/webshopapps/m2ShipperHQ
+[issues]: https://github.com/webshopapps/m2ShipperHQ/issues
 
 ## Usage Examples
 
@@ -43,9 +43,9 @@ Finally you need to get the actual module loaded within Magento itself. In Magen
 This library aims to support and is [tested against][travis] the following PHP
 implementations:
 
-* PHP 5.4
+* PHP 5.5
 
-It has been developed against Magento 2 0.42.0-beta3 but should work against later versions. The version is not
+It has been developed against Magento 2 v2.0.0 but should work against later versions. The version is not
 enforced in the composer.json
 
 ## Credits
