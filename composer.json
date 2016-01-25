@@ -1,75 +1,42 @@
 {
-  "name": "webshopapps/m2matrixrate",
+    "name": "webshopapps/m2matrixrate",
 
-  "description": "Magento Shipping Multiple Table Rates - MatrixRate",
+    "description": "Magento Shipping Multiple Table Rates - MatrixRate",
 
-  "license": "OSL",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
 
-  "authors": [
-    {
-      "name": "WebShopApps",
-      "email": "sales@webshopapps.com",
-      "homepage": "http://www.WebShopApps.com"
+    "authors": [
+        {
+            "name": "ShipperHQ",
+            "email": "sales@wshipperhq.com",
+            "homepage": "http://www.Shipperhq.com"
+        },
+        {
+            "name": "Karen Baker"
+        }
+    ],
+
+    "type": "magento2-module",
+
+    "version": "0.1.0",
+
+    "support": {
+        "documentation": "http://docs.shipperhq.com"
     },
-    {
-      "name": "Karen Baker"
+
+    "require": {
+        "magento/framework": "100.0.2"
+    },
+
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "WebShopApps\\MatrixRate\\": ""
+        }
     }
-  ],
-
-  "type": "magento2-module",
-
-  "version": "0.1.0",
-
-  "support": {
-    "source": "https://github.com/webshopapps/m2matrixrate",
-    "issues": "https://github.com/webshopapps/m2matrixrate/issues"
-  },
-  
-  "autoload": {
-    "psr-4": {
-      "Webshopapps\\Matrixrate\\": "app/code/Webshopapps/Matrixrate/src/"
-    }
-  },
-
-  "autoload-dev": {
-    "psr-4": {
-      "Matrixrate\\Test\\Unit\\": "tests/unit/",
-      "Matrixrate\\Test\\Functional\\": "tests/functional/"
-    }
-  },
-
-  "require": {
-    "php": "~5.5.0|~5.6.0",
-    "magento/magento-composer-installer": "*",
-    "magento/framework": "~0.74",
-    "magento/module-store": "~0.74",
-    "magento/module-shipping": "~0.74",
-    "magento/module-quote": "~0.74",
-    "magento/module-checkout": "~0.74"
-  },
-
-  "require-dev": {
-    "mockery/mockery": "~0.9",
-    "phpunit/phpunit": "~4.0",
-    "sensiolabs/security-checker": "~2.0",
-    "squizlabs/php_codesniffer": "~1.0"
-  },
-
-  "suggest": {
-    "sensiolabs/security-checker": "Required for ComposerSecurityReview.",
-    "squizlabs/php_codesniffer":   "Required for PhpCodeSnifferReview."
-  },
-
-  "config": {
-    "optimize-autoloader": true,
-    "preferred-install": "dist"
-  },
-  "extra": {
-    "map": [
-      [
-        "*",
-        "Webshopapps/Matrixrate"
-      ]
-    ]
-  }
 }
