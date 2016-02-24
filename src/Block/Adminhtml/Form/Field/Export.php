@@ -73,7 +73,7 @@ class Export extends \Magento\Framework\Data\Form\Element\AbstractElement
 
         $params = ['website' => $buttonBlock->getRequest()->getParam('website')];
 
-        $url = $this->_backendUrl->getUrl("*/*/exportMatrixrates", $params);
+        $url = $this->_backendUrl->getUrl("shqmatrixrate/system/exportMatrixrates", $params);
         $data = [
             'label' => __('Export CSV'),
             'onclick' => "setLocation('" .
