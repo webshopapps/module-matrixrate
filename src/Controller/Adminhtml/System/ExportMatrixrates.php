@@ -31,7 +31,7 @@
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace WebShopApps\MatrixRate\Controller\Adminhtml\System\Config;
+namespace WebShopApps\MatrixRate\Controller\Adminhtml\System;
 
 use Magento\Framework\App\ResponseInterface;
 use Magento\Config\Controller\Adminhtml\System\ConfigSectionChecker;
