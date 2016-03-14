@@ -169,14 +169,17 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             'dest_region',
             ['header' => __('Region/State'), 'index' => 'dest_region', 'default' => '*']
         );
-
-        $this->addColumn(
-            'dest_zip',
-            ['header' => __('Zip/Postal Code'), 'index' => 'dest_zip', 'default' => '*']
-        );
         $this->addColumn(
             'dest_city',
             ['header' => __('City'), 'index' => 'dest_city', 'default' => '*']
+        );
+        $this->addColumn(
+            'dest_zip',
+            ['header' => __('Zip/Postal Code From'), 'index' => 'dest_zip', 'default' => '*']
+        );
+        $this->addColumn(
+            'dest_zip_to',
+            ['header' => __('Zip/Postal Code To'), 'index' => 'dest_zip_to', 'default' => '*']
         );
 
 
