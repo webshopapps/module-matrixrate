@@ -190,12 +190,20 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * Return table rate array or false by rate request
      *
      * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
+     * @param bool $zipRangeSet
      * @return array|bool
      */
-    public function getRate(\Magento\Quote\Model\Quote\Address\RateRequest $request)
+    public function getRate(\Magento\Quote\Model\Quote\Address\RateRequest $request, $zipRangeSet = false)
     {
         $adapter = $this->getConnection();
         $shippingData=array();
+        $postcode = $request->getDestPostcode();
+        if ($zipRangeSet && is_numeric($postcode)) {
+            #  Want to search for postcodes within a range
+            $zipSearchString = ' AND :postcode BETWEEN dest_zip AND dest_zip_to ';
+        } else {
+            $zipSearchString = " AND :postcode LIKE dest_zip ";
+        }
 
         for ($j=0;$j<8;$j++) {
 
@@ -211,7 +219,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $bind=array();
             switch($j) {
                 case 0: // country, region, city, postcode
-                   $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 AND dest_zip = :postcode";  // TODO Add city
+                   $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 " .$zipSearchString;  // TODO Add city
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':region_id' => (int)$request->getDestRegionId(),
@@ -220,7 +228,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                    ];
                     break;
                 case 1: // country, region, no city, postcode
-                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND dest_city='' AND dest_zip =:postcode";
+                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND dest_city='' ".$zipSearchString;
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':region_id' => (int)$request->getDestRegionId(),
@@ -243,7 +251,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                     ];
                     break;
                 case 4: // country, postcode
-                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = '0' AND dest_city ='*' AND dest_zip = :postcode";
+                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = '0' AND dest_city ='*' ".$zipSearchString;
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':postcode' => $request->getDestPostcode(),

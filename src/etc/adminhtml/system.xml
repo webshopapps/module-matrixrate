@@ -68,7 +68,11 @@
                     <label>Import</label>
                     <backend_model>WebShopApps\MatrixRate\Model\Config\Backend\Matrixrate</backend_model>
                 </field>
-
+                <field id="zip_range" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Use Numeric Zipcode Ranges</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>You should only set this to Yes if you use purely numeric zipcodes (e.g. USA/AUS clients)</comment>
+                </field>
 
                 <field id="handling_type" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Calculate Handling Fee</label>
