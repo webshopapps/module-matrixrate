@@ -175,7 +175,8 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
 
         /** @var \Magento\Shipping\Model\Rate\Result $result */
         $result = $this->_rateResultFactory->create();
-        $rateArray = $this->getRate($request);
+        $zipRange = $this->getConfigData('zip_range');
+        $rateArray = $this->getRate($request, $zipRange);
 
         $request->setPackageWeight($oldWeight);
         $request->setPackageQty($oldQty);
@@ -226,11 +227,12 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
 
     /**
      * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
+     * @param bool $zipRange
      * @return array|bool
      */
-    public function getRate(\Magento\Quote\Model\Quote\Address\RateRequest $request)
+    public function getRate(\Magento\Quote\Model\Quote\Address\RateRequest $request, $zipRange)
     {
-        return $this->_matrixrateFactory->create()->getRate($request);
+        return $this->_matrixrateFactory->create()->getRate($request, $zipRange);
     }
 
     /**
