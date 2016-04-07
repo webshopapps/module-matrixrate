@@ -79,5 +79,6 @@ class Matrixrate extends \Magento\Framework\App\Config\Value
         /** @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate $matrixRate */
         $matrixRate = $this->_matrixrateFactory->create();
         $matrixRate->uploadAndImport($this);
+        return parent::afterSave();
     }
 }
