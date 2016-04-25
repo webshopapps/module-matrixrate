@@ -44,6 +44,8 @@ This library aims to support and is [tested against][travis] the following PHP
 implementations:
 
 * PHP 5.5
+* PHP 5.6
+* PHP 5.7
 
 It has been developed against Magento 2 v2.0.0 but should work against later versions. The version is not
 enforced in the composer.json
