@@ -14,8 +14,8 @@ You also need to specify the repository:
  
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/webshopapps/m2ShipperHQ.git"
+            "type": "git",
+            "url": "git@github.com:webshopapps/module-matrixrate.git"
         }
     ]
 
