@@ -21,8 +21,6 @@
 
     "type": "magento2-module",
 
-    "version": "20.0.1",
-
     "support": {
         "documentation": "http://docs.shipperhq.com"
     },
