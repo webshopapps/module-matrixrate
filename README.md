@@ -14,8 +14,8 @@ You also need to specify the repository:
  
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/webshopapps/m2ShipperHQ.git"
+            "type": "git",
+            "url": "git@github.com:webshopapps/module-matrixrate.git"
         }
     ]
 
@@ -44,8 +44,8 @@ This library aims to support and is [tested against][travis] the following PHP
 implementations:
 
 * PHP 5.5
-
-It has been developed against Magento 2 v2.0.0 but should work against later versions. The version is not
+* PHP 5.6
+* PHP 5.7
 enforced in the composer.json
 
 ## Credits
