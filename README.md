@@ -6,24 +6,9 @@ A Shipping Rate module for Magento 2.x which supports showing multiple shipping 
 
 Installation is via composer.
 
-Add the following to the composer.json file in your magento root directory:
-
-    "webshopapps/mage2-matrixrate": "dev-master"
-        
-You also need to specify the repository:
- 
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:webshopapps/module-matrixrate.git"
-        }
-    ]
-
-You can now install the module via `composer update` from the root directory.
-
-Finally you need to get the actual module loaded within Magento itself. In Magento 1.x you add a file to app/etc/modules.
-  In Magento 2.x run the following command for each module you wish to enable
-  php -f bin/magento module:enable --clear-static-content Module_Name
+To install, go to the root folder of your Magento installation and type 
+  composer require webshopapps/module-matrixrate
+Once composer has completed downloading run
   php -f bin/magento setup:upgrade
 
 
