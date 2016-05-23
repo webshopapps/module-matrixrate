@@ -1,30 +1,18 @@
 # ShipperHQ and WebShopApps MatrixRate
-
 A Shipping Rate module for Magento 2.x which supports showing multiple shipping methods.  This is based on the Magento Tablerate module and is managed via a csv file.
 
-## Installation
+Facts
+-----
+- [extension on GitHub](https://github.com/webshopapps/module-matrixrate)
+- Magento v1.0 available for download from www.webshopapps.com
 
-Installation is via composer.
+Description
+-----------
+The MatrixRate shipping extension is the original Magento solution that enables you to offer multiple shipping options to customers based on their locations. With MatrixRate you can define different shipping rates according to destination, shipping method and the weight, price or quantity of an item.
 
-To install, go to the root folder of your Magento installation and type 
-  composer require webshopapps/module-matrixrate
-Once composer has completed downloading run
-  php -f bin/magento setup:upgrade
-
-
-## Resources
-* [View Source on GitHub][code]
-* [Report Issues on GitHub][issues]
-
-[code]: https://github.com/webshopapps/m2ShipperHQ
-[issues]: https://github.com/webshopapps/m2ShipperHQ/issues
-
-## Usage Examples
-
-## Tests
-
-
-## Supported Versions
+Compatibility
+-------------
+- Magento >= 2.0
 This library aims to support and is [tested against][travis] the following PHP
 implementations:
 
@@ -33,8 +21,16 @@ implementations:
 * PHP 5.7
 enforced in the composer.json
 
-## Credits
+Installation Instructions
+-------------------------
+Install using composer by adding to your composer file using commands:
 
+1. composer require webshopapps/module-matrixrate
+2. composer update
+3. bin/magento setup:upgrade
+
+Credits
+---------
 This extension borrows heavily from the Tablerate capability in Magento2.  In order to keep codebase as bug-free and
 conformant as possible the tablerate code is used in preference to writing from scratch.  This hopefully also
 allows for easier understanding by users.
@@ -49,8 +45,17 @@ Assistance around composer, Magento2 structure, etc was also taken from these so
 * [https://alankent.wordpress.com/2014/08/03/creating-a-magento-2-composer-module/](http://)
 * [https://github.com/SchumacherFM/mage2-advanced-rest-permissions](http://)
 
+Support
+-------
+If you have any issues with this extension, open an issue on [GitHub](https://github.com/webshopapps/module-matrixrate/issues).
+Alternatively you can contact us via email at support@webshopapps.com or via our website http://webshopapps.com/contacts/
 
-## License
+Contribution
+------------
+Any contribution is highly appreciated. The best way to contribute code is to open a [pull request on GitHub](https://help.github.com/articles/using-pull-requests).
+
+License
+-------
 Copyright (c) 2015 Zowta LLC & Zowta Ltd. See [LICENSE][] for
 details.
 
@@ -59,3 +64,9 @@ We also dutifully respect the [Magento][] OSL license, which is included in this
 
 [license]: LICENSE.md
 [magento]: Magento2_LICENSE.md
+
+Copyright
+---------
+Copyright (c) 2015 Zowta LLC & Zowta Ltd.
+
+
