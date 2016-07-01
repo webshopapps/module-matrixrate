@@ -30,6 +30,12 @@ Install using composer by adding to your composer file using commands:
 2. composer update
 3. bin/magento setup:upgrade
 
+Support
+-------
+For further information on using Matrixrates, please refer to our [online documentation](http://support.webshopapps.com/matrixrate/).
+If you have any issues with this extension, open an issue on [GitHub](https://github.com/webshopapps/module-matrixrate/issues).
+
+
 Credits
 ---------
 This extension borrows heavily from the Tablerate capability in Magento2.  In order to keep codebase as bug-free and
