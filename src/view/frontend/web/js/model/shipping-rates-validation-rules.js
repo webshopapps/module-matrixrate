@@ -17,10 +17,10 @@ define(
                         'required': true
                     },
                     'region_id' : {
-                        'required': true
+                        'required': false
                     },
                     'city' : {
-                        'required': true
+                        'required': false
                     }
                 };
             }
