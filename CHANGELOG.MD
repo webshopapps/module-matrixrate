@@ -17,3 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [20.0.4] - 2016-08-01
 ### Added
 - M2-19 modified js validation
+
+## [20.0.5] - 2016-08-02
+### Added
+- SHQ16-1346 make address fields not mandatory and include region for support for text field region
