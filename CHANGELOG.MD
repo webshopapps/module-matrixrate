@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.2.7](https://github.com/webshopapps/m2Matrixrate/tree/1.2.7) (2016-10-03)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.6...1.2.7)
+
+## [1.2.6](https://github.com/webshopapps/m2Matrixrate/tree/1.2.6) (2016-08-17)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.5...1.2.6)
+
 ## [1.2.5](https://github.com/webshopapps/m2Matrixrate/tree/1.2.5) (2016-04-07)
 [Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.4...1.2.5)
 
@@ -10,13 +16,13 @@
 [Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.2...1.2.3)
 
 ## [1.2.2](https://github.com/webshopapps/m2Matrixrate/tree/1.2.2) (2016-03-14)
-[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.1.0...1.2.2)
-
-## [1.1.0](https://github.com/webshopapps/m2Matrixrate/tree/1.1.0) (2016-02-25)
-[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.1...1.1.0)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.1...1.2.2)
 
 ## [1.2.1](https://github.com/webshopapps/m2Matrixrate/tree/1.2.1) (2016-02-25)
-[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.0.0...1.2.1)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.1.0...1.2.1)
+
+## [1.1.0](https://github.com/webshopapps/m2Matrixrate/tree/1.1.0) (2016-02-25)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.0.0...1.1.0)
 
 ## [1.0.0](https://github.com/webshopapps/m2Matrixrate/tree/1.0.0) (2015-12-11)
 **Merged pull requests:**

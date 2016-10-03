@@ -78,7 +78,7 @@ class Export extends \Magento\Framework\Data\Form\Element\AbstractElement
             'label' => __('Export CSV'),
             'onclick' => "setLocation('" .
             $url .
-            "conditionName/' + $('carriers_matrixrate_condition_name').value + '/matrixrates.csv' )",
+            "conditionName/' + $('carriers_matrixrate_condition_name').value)",
             'class' => '',
         ];
 
