@@ -138,11 +138,9 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected $_regionCollectionFactory;
 
     /**
-     * Filesystem instance
-     *
-     * @var \Magento\Framework\Filesystem
+     *   * @var \Magento\Framework\Filesystem\Directory\ReadFactory
      */
-    protected $_filesystem;
+    private $_readFactory;
 
     /**
      * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
@@ -152,7 +150,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param \WebShopApps\MatrixRate\Model\Carrier\Matrixrate $carrierMatrixrate
      * @param \Magento\Directory\Model\ResourceModel\Country\CollectionFactory $countryCollectionFactory
      * @param \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory
-     * @param \Magento\Framework\Filesystem $filesystem
+     * @param \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory
      * @param string|null $resourcePrefix
      */
     public function __construct(
@@ -163,7 +161,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         \WebShopApps\MatrixRate\Model\Carrier\Matrixrate $carrierMatrixrate,
         \Magento\Directory\Model\ResourceModel\Country\CollectionFactory $countryCollectionFactory,
         \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory,
-        \Magento\Framework\Filesystem $filesystem,
+        \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory,
         $resourcePrefix = null
     ) {
         parent::__construct($context, $resourcePrefix);
@@ -173,7 +171,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_carrierMatrixrate = $carrierMatrixrate;
         $this->_countryCollectionFactory = $countryCollectionFactory;
         $this->_regionCollectionFactory = $regionCollectionFactory;
-        $this->_filesystem = $filesystem;
+        $this->_readFactory = $readFactory;
     }
 
     /**
@@ -219,13 +217,13 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $bind=array();
             switch($j) {
                 case 0: // country, region, city, postcode
-                   $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 " .$zipSearchString;  // TODO Add city
+                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 " .$zipSearchString;  // TODO Add city
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':region_id' => (int)$request->getDestRegionId(),
                         ':city' => $request->getDestCity(),
                         ':postcode' => $request->getDestPostcode(),
-                   ];
+                    ];
                     break;
                 case 1: // country, region, no city, postcode
                     $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND dest_city='' ".$zipSearchString;
@@ -329,9 +327,9 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_importErrors = [];
         $this->_importedRows = 0;
 
-        $tmpDirectory = $this->_filesystem->getDirectoryRead(DirectoryList::SYS_TMP);
-        $path = $tmpDirectory->getRelativePath($csvFile);
-        $stream = $tmpDirectory->openFile($path);
+        $uploadDirectory = $this->_readFactory->create(ini_get('upload_tmp_dir') ?: sys_get_temp_dir());
+        $path = $uploadDirectory->getRelativePath($csvFile);
+        $stream = $uploadDirectory->openFile($path);
 
         // check and skip headers
         $headers = $stream->readCsv();
@@ -610,7 +608,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $valueTo,                   // condition_value To
             $price,                     // price
             $shippingMethod
-       ];
+        ];
     }
 
     /**
