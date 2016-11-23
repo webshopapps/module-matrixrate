@@ -183,7 +183,13 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
 
         $foundRates = false;
 
+        $excludedDeliveries = [];
         foreach ($rateArray as $rate) {
+            if ($rate['price'] < 0) {
+                $excludedDeliveries[] = $rate['shipping_method'];
+                continue;
+            }
+
             if (!empty($rate) && $rate['price'] >= 0) {
                 /** @var \Magento\Quote\Model\Quote\Address\RateResult\Method $method */
                 $method = $this->_resultMethodFactory->create();
@@ -205,6 +211,16 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
 
                 $result->append($method);
                 $foundRates = true; // have found some valid rates
+            }
+        }
+
+        if (!empty($excludedDeliveries)) {
+            $allRates = $result->getAllRates();
+            $result = $this->_rateResultFactory->create();
+            foreach ($allRates as $method) {
+                if (!in_array($method->getMethodTitle(), $excludedDeliveries)) {
+                    $result->append($method);
+                }
             }
         }
 

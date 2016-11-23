@@ -654,10 +654,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         if (!is_numeric($value)) {
             return false;
         }
-        $value = (double)sprintf('%.4F', $value);
-        if ($value < 0.0000) {
-            return false;
-        }
-        return $value;
+
+        return (double)sprintf('%.4F', $value);
     }
 }
