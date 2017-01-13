@@ -1,5 +1,8 @@
 # Change Log
 
+## [1.2.9](https://github.com/webshopapps/m2Matrixrate/tree/1.2.9) (2016-12-22)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.8...1.2.9)
+
 ## [1.2.8](https://github.com/webshopapps/m2Matrixrate/tree/1.2.8) (2016-11-21)
 [Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.7...1.2.8)
 
