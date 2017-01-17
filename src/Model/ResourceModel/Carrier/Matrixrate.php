@@ -143,6 +143,11 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     private $_readFactory;
 
     /**
+     * @var \Magento\Framework\Filesystem\Directory\ReadFactory
+     */
+    private $_readFactory;
+
+    /**
      * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $coreConfig
