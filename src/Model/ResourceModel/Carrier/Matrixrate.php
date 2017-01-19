@@ -141,6 +141,10 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      *   * @var \Magento\Framework\Filesystem\Directory\ReadFactory
      */
     private $_readFactory;
+    /**
+     *   * @var \Magento\Framework\Filesystem
+     */
+    protected $_filesystem;
 
     /**
      * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
@@ -151,6 +155,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param \Magento\Directory\Model\ResourceModel\Country\CollectionFactory $countryCollectionFactory
      * @param \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory
      * @param \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory
+     *  @param \Magento\Framework\Filesystem $filesystem
      * @param string|null $resourcePrefix
      */
     public function __construct(
@@ -162,6 +167,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         \Magento\Directory\Model\ResourceModel\Country\CollectionFactory $countryCollectionFactory,
         \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory,
         \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory,
+        \Magento\Framework\Filesystem $filesystem,
         $resourcePrefix = null
     ) {
         parent::__construct($context, $resourcePrefix);
@@ -172,6 +178,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_countryCollectionFactory = $countryCollectionFactory;
         $this->_regionCollectionFactory = $regionCollectionFactory;
         $this->_readFactory = $readFactory;
+        $this->_filesystem = $filesystem;
     }
 
     /**
@@ -327,9 +334,11 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_importErrors = [];
         $this->_importedRows = 0;
 
-        $uploadDirectory = $this->_readFactory->create(ini_get('upload_tmp_dir') ?: sys_get_temp_dir());
-        $path = $uploadDirectory->getRelativePath($csvFile);
-        $stream = $uploadDirectory->openFile($path);
+        //M2-20
+        $tmpDirectory = ini_get('upload_tmp_dir')? $this->_readFactory->create(ini_get('upload_tmp_dir'))
+            : $this->_filesystem->getDirectoryRead(DirectoryList::SYS_TMP);
+        $path = $tmpDirectory->getRelativePath($csvFile);
+        $stream = $tmpDirectory->openFile($path);
 
         // check and skip headers
         $headers = $stream->readCsv();
