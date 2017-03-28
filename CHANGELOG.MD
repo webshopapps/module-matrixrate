@@ -23,19 +23,22 @@ SHQ16-1335 updated docs links in readme and configuration header,  SHQ16-1346 ma
 ## 1.2.7
 SHQ16-1617 remove csv from url params
 
-## 1.2.8
+## 20.0.6
 M2-20 account for php configuration temp dir
 
-## 1.2.9
+## 20.0.7
 M2-23 remove crontab file, not required
 
-## 1.3.0
+## 20.0.8
 M2-20 account for upload when no upload_tmp_dir setting in php config
 
-## 1.3.1
+## 20.0.9
 M2-23 remove crontab file, not required, M2-20 account for upload when no upload_tmp_dir setting in php config, Updated readme with latest M2 issues and updated support statement
 
-## 1.3.2
+## 20.1.0
 M2-23 remove crontab file
+
+## 20.1.1
+M2-24 code sniffer changes and replaced use of
 
 

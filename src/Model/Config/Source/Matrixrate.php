@@ -38,14 +38,14 @@ class Matrixrate implements \Magento\Framework\Option\ArrayInterface
     /**
      * @var \WebShopApps\MatrixRate\Model\Carrier\Matrixrate
      */
-    protected $_carrierMatrixrate;
+    protected $carrierMatrixrate;
 
     /**
      * @param \WebShopApps\MatrixRate\Model\Carrier\Matrixrate $carrierMatrixrate
      */
     public function __construct(\WebShopApps\MatrixRate\Model\Carrier\Matrixrate $carrierMatrixrate)
     {
-        $this->_carrierMatrixrate = $carrierMatrixrate;
+        $this->carrierMatrixrate = $carrierMatrixrate;
     }
 
     /**
@@ -54,7 +54,7 @@ class Matrixrate implements \Magento\Framework\Option\ArrayInterface
     public function toOptionArray()
     {
         $arr = [];
-        foreach ($this->_carrierMatrixrate->getCode('condition_name') as $k => $v) {
+        foreach ($this->carrierMatrixrate->getCode('condition_name') as $k => $v) {
             $arr[] = ['value' => $k, 'label' => $v];
         }
         return $arr;

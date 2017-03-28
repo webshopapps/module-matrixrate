@@ -52,29 +52,27 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
     /**
      * @var string
      */
-    protected $_defaultConditionName = 'package_weight';
+    protected $defaultConditionName = 'package_weight';
 
     /**
      * @var array
      */
-    protected $_conditionNames = [];
+    protected $conditionNames = [];
 
     /**
      * @var \Magento\Shipping\Model\Rate\ResultFactory
      */
-    protected $_rateResultFactory;
+    protected $rateResultFactory;
 
     /**
      * @var \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory
      */
-    protected $_resultMethodFactory;
+    protected $resultMethodFactory;
 
     /**
      * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory
      */
-    protected $_matrixrateFactory;
-
-
+    protected $matrixrateFactory;
 
     /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
@@ -95,12 +93,12 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
         \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory $matrixrateFactory,
         array $data = []
     ) {
-        $this->_rateResultFactory = $rateResultFactory;
-        $this->_resultMethodFactory = $resultMethodFactory;
-        $this->_matrixrateFactory = $matrixrateFactory;
+        $this->rateResultFactory = $rateResultFactory;
+        $this->resultMethodFactory = $resultMethodFactory;
+        $this->matrixrateFactory = $matrixrateFactory;
         parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
         foreach ($this->getCode('condition_name') as $k => $v) {
-            $this->_conditionNames[] = $k;
+            $this->conditionNames[] = $k;
         }
     }
 
@@ -163,7 +161,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
 
         if (!$request->getConditionMRName()) {
             $conditionName = $this->getConfigData('condition_name');
-            $request->setConditionMRName($conditionName ? $conditionName : $this->_defaultConditionName);
+            $request->setConditionMRName($conditionName ? $conditionName : $this->defaultConditionName);
         }
 
         // Package weight and qty free shipping
@@ -174,7 +172,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
         $request->setPackageQty($oldQty - $freeQty);
 
         /** @var \Magento\Shipping\Model\Rate\Result $result */
-        $result = $this->_rateResultFactory->create();
+        $result = $this->rateResultFactory->create();
         $zipRange = $this->getConfigData('zip_range');
         $rateArray = $this->getRate($request, $zipRange);
 
@@ -186,7 +184,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
         foreach ($rateArray as $rate) {
             if (!empty($rate) && $rate['price'] >= 0) {
                 /** @var \Magento\Quote\Model\Quote\Address\RateResult\Method $method */
-                $method = $this->_resultMethodFactory->create();
+                $method = $this->resultMethodFactory->create();
 
                 $method->setCarrier('matrixrate');
                 $method->setCarrierTitle($this->getConfigData('title'));
@@ -208,7 +206,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
             }
         }
 
-        if (!$foundRates){
+        if (!$foundRates) {
             /** @var \Magento\Quote\Model\Quote\Address\RateResult\Error $error */
             $error = $this->_rateErrorFactory->create(
                 [
@@ -232,7 +230,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
      */
     public function getRate(\Magento\Quote\Model\Quote\Address\RateRequest $request, $zipRange)
     {
-        return $this->_matrixrateFactory->create()->getRate($request, $zipRange);
+        return $this->matrixrateFactory->create()->getRate($request, $zipRange);
     }
 
     /**
