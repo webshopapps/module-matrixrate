@@ -18,7 +18,7 @@ define(
         defaultShippingRatesValidationRules,
         matrixrateShippingRatesValidator,
         matrixrateShippingRatesValidationRules
-        ) {
+    ) {
         "use strict";
         defaultShippingRatesValidator.registerValidator('matrixrate', matrixrateShippingRatesValidator);
         defaultShippingRatesValidationRules.registerRules('matrixrate', matrixrateShippingRatesValidationRules);

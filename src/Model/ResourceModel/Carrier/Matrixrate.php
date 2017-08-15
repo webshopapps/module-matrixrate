@@ -48,42 +48,42 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      *
      * @var int
      */
-    protected $_importWebsiteId = 0;
+    protected $importWebsiteId = 0;
 
     /**
      * Errors in import process
      *
      * @var array
      */
-    protected $_importErrors = [];
+    protected $importErrors = [];
 
     /**
      * Count of imported table rates
      *
      * @var int
      */
-    protected $_importedRows = 0;
+    protected $importedRows = 0;
 
     /**
      * Array of unique table rate keys to protect from duplicates
      *
      * @var array
      */
-    protected $_importUniqueHash = [];
+    protected $importUniqueHash = [];
 
     /**
      * Array of countries keyed by iso2 code
      *
      * @var array
      */
-    protected $_importIso2Countries;
+    protected $importIso2Countries;
 
     /**
      * Array of countries keyed by iso3 code
      *
      * @var array
      */
-    protected $_importIso3Countries;
+    protected $importIso3Countries;
 
     /**
      * Associative array of countries and regions
@@ -91,58 +91,60 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      *
      * @var array
      */
-    protected $_importRegions;
+    protected $importRegions;
 
     /**
      * Import Table Rate condition name
      *
      * @var string
      */
-    protected $_importConditionName;
+    protected $importConditionName;
 
     /**
      * Array of condition full names
      *
      * @var array
      */
-    protected $_conditionFullNames = [];
+    protected $conditionFullNames = [];
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    protected $_coreConfig;
+    protected $coreConfig;
 
     /**
      * @var \Psr\Log\LoggerInterface
      */
-    protected $_logger;
+    protected $logger;
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    protected $_storeManager;
+    protected $storeManager;
 
     /**
      * @var \WebShopApps\MatrixRate\Model\Carrier\Matrixrate
      */
-    protected $_carrierMatrixrate;
+    protected $carrierMatrixrate;
 
     /**
      * @var \Magento\Directory\Model\ResourceModel\Country\CollectionFactory
      */
-    protected $_countryCollectionFactory;
+    protected $countryCollectionFactory;
 
     /**
      * @var \Magento\Directory\Model\ResourceModel\Region\CollectionFactory
      */
-    protected $_regionCollectionFactory;
+    protected $regionCollectionFactory;
 
     /**
-     * Filesystem instance
-     *
-     * @var \Magento\Framework\Filesystem
+     *   * @var \Magento\Framework\Filesystem\Directory\ReadFactory
      */
-    protected $_filesystem;
+    private $readFactory;
+    /**
+     *   * @var \Magento\Framework\Filesystem
+     */
+    protected $filesystem;
 
     /**
      * @param \Magento\Framework\Model\ResourceModel\Db\Context $context
@@ -152,6 +154,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param \WebShopApps\MatrixRate\Model\Carrier\Matrixrate $carrierMatrixrate
      * @param \Magento\Directory\Model\ResourceModel\Country\CollectionFactory $countryCollectionFactory
      * @param \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory
+     * @param \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory
      * @param \Magento\Framework\Filesystem $filesystem
      * @param string|null $resourcePrefix
      */
@@ -163,17 +166,19 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         \WebShopApps\MatrixRate\Model\Carrier\Matrixrate $carrierMatrixrate,
         \Magento\Directory\Model\ResourceModel\Country\CollectionFactory $countryCollectionFactory,
         \Magento\Directory\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory,
+        \Magento\Framework\Filesystem\Directory\ReadFactory $readFactory,
         \Magento\Framework\Filesystem $filesystem,
         $resourcePrefix = null
     ) {
         parent::__construct($context, $resourcePrefix);
-        $this->_coreConfig = $coreConfig;
-        $this->_logger = $logger;
-        $this->_storeManager = $storeManager;
-        $this->_carrierMatrixrate = $carrierMatrixrate;
-        $this->_countryCollectionFactory = $countryCollectionFactory;
-        $this->_regionCollectionFactory = $regionCollectionFactory;
-        $this->_filesystem = $filesystem;
+        $this->coreConfig = $coreConfig;
+        $this->logger = $logger;
+        $this->storeManager = $storeManager;
+        $this->carrierMatrixrate = $carrierMatrixrate;
+        $this->countryCollectionFactory = $countryCollectionFactory;
+        $this->regionCollectionFactory = $regionCollectionFactory;
+        $this->readFactory = $readFactory;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -196,7 +201,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     public function getRate(\Magento\Quote\Model\Quote\Address\RateRequest $request, $zipRangeSet = false)
     {
         $adapter = $this->getConnection();
-        $shippingData=array();
+        $shippingData=[];
         $postcode = $request->getDestPostcode();
         if ($zipRangeSet && is_numeric($postcode)) {
             #  Want to search for postcodes within a range
@@ -205,8 +210,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $zipSearchString = " AND :postcode LIKE dest_zip ";
         }
 
-        for ($j=0;$j<8;$j++) {
-
+        for ($j=0; $j<8; $j++) {
             $select = $adapter->select()->from(
                 $this->getMainTable()
             )->where(
@@ -216,19 +220,20 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             );
 
             $zoneWhere='';
-            $bind=array();
-            switch($j) {
+            $bind=[];
+            switch ($j) {
                 case 0: // country, region, city, postcode
-                   $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 " .$zipSearchString;  // TODO Add city
+                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 " .$zipSearchString;
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':region_id' => (int)$request->getDestRegionId(),
                         ':city' => $request->getDestCity(),
                         ':postcode' => $request->getDestPostcode(),
-                   ];
+                    ];
                     break;
                 case 1: // country, region, no city, postcode
-                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND dest_city='' ".$zipSearchString;
+                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND dest_city='' "
+                        .$zipSearchString;
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':region_id' => (int)$request->getDestRegionId(),
@@ -236,7 +241,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                     ];
                     break;
                 case 2: // country, state, city, no postcode
-                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = :region_id AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 AND dest_zip ='*'"; // TODO Add city search
+                    $zoneWhere = "dest_country_id = :country_id AND dest_region_id = :region_id AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 AND dest_zip ='*'";
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':region_id' => (int)$request->getDestRegionId(),
@@ -244,14 +249,15 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                     ];
                     break;
                 case 3: //country, city, no region, no postcode
-                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = '0' AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 AND dest_zip ='*'"; // TODO Add city
+                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = '0' AND STRCMP(LOWER(dest_city),LOWER(:city))= 0 AND dest_zip ='*'";
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':city' => $request->getDestCity(),
                     ];
                     break;
                 case 4: // country, postcode
-                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = '0' AND dest_city ='*' ".$zipSearchString;
+                    $zoneWhere =  "dest_country_id = :country_id AND dest_region_id = '0' AND dest_city ='*' "
+                        .$zipSearchString;
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':postcode' => $request->getDestPostcode(),
@@ -285,20 +291,18 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $select->where('condition_from_value < :condition_value');
             $select->where('condition_to_value >= :condition_value');
 
-            $this->_logger->debug('SQL Select: ',$select->getPart('where'));
-            $this->_logger->debug('Bindings: ',$bind);
+            $this->logger->debug('SQL Select: ', $select->getPart('where'));
+            $this->logger->debug('Bindings: ', $bind);
 
             $results = $adapter->fetchAll($select, $bind);
 
             if (!empty($results)) {
-
-                $this->_logger->debug('SQL Results: ',$results);
+                $this->logger->debug('SQL Results: ', $results);
                 foreach ($results as $data) {
                     $shippingData[]=$data;
                 }
                 break;
             }
-
         }
 
         return $shippingData;
@@ -310,26 +314,28 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param \Magento\Framework\Object $object
      * @throws \Magento\Framework\Exception\LocalizedException
      * @return \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate
-     * @todo: this method should be refactored as soon as updated design will be provided
-     * @see https://wiki.corp.x.com/display/MCOMS/Magento+Filesystem+Decisions
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function uploadAndImport(\Magento\Framework\DataObject $object)
     {
-        if (empty($_FILES['groups']['tmp_name']['matrixrate']['fields']['import']['value'])) {
+        //M2-24
+        $importFieldData = $object->getFieldsetDataValue('import');
+        if (empty($importFieldData['tmp_name'])) {
             return $this;
         }
 
-        $csvFile = $_FILES['groups']['tmp_name']['matrixrate']['fields']['import']['value'];
-        $website = $this->_storeManager->getWebsite($object->getScopeId());
+        $website = $this->storeManager->getWebsite($object->getScopeId());
+        $csvFile = $importFieldData['tmp_name'];
 
-        $this->_importWebsiteId = (int)$website->getId();
-        $this->_importUniqueHash = [];
-        $this->_importErrors = [];
-        $this->_importedRows = 0;
+        $this->importWebsiteId = (int)$website->getId();
+        $this->importUniqueHash = [];
+        $this->importErrors = [];
+        $this->importedRows = 0;
 
-        $tmpDirectory = $this->_filesystem->getDirectoryRead(DirectoryList::SYS_TMP);
+        //M2-20
+        $tmpDirectory = ini_get('upload_tmp_dir')? $this->readFactory->create(ini_get('upload_tmp_dir'))
+            : $this->filesystem->getDirectoryRead(DirectoryList::SYS_TMP);
         $path = $tmpDirectory->getRelativePath($csvFile);
         $stream = $tmpDirectory->openFile($path);
 
@@ -341,11 +347,11 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         if ($object->getData('groups/matrixrate/fields/condition_name/inherit') == '1') {
-            $conditionName = (string)$this->_coreConfig->getValue('carriers/matrixrate/condition_name', 'default');
+            $conditionName = (string)$this->coreConfig->getValue('carriers/matrixrate/condition_name', 'default');
         } else {
             $conditionName = $object->getData('groups/matrixrate/fields/condition_name/value');
         }
-        $this->_importConditionName = $conditionName;
+        $this->importConditionName = $conditionName;
 
         $adapter = $this->getConnection();
         $adapter->beginTransaction();
@@ -359,8 +365,8 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
             // delete old data by website and condition name
             $condition = [
-                'website_id = ?' => $this->_importWebsiteId,
-                'condition_name = ?' => $this->_importConditionName,
+                'website_id = ?' => $this->importWebsiteId,
+                'condition_name = ?' => $this->importConditionName,
             ];
             $adapter->delete($this->getMainTable(), $condition);
 
@@ -390,7 +396,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         } catch (\Exception $e) {
             $adapter->rollback();
             $stream->close();
-            $this->_logger->critical($e);
+            $this->logger->critical($e);
             throw new \Magento\Framework\Exception\LocalizedException(
                 __('Something went wrong while importing matrix rates.')
             );
@@ -398,10 +404,10 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         $adapter->commit();
 
-        if ($this->_importErrors) {
+        if ($this->importErrors) {
             $error = __(
                 'We couldn\'t import this file because of these errors: %1',
-                implode(" \n", $this->_importErrors)
+                implode(" \n", $this->importErrors)
             );
             throw new \Magento\Framework\Exception\LocalizedException($error);
         }
@@ -416,18 +422,18 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _loadDirectoryCountries()
     {
-        if ($this->_importIso2Countries !== null && $this->_importIso3Countries !== null) {
+        if ($this->importIso2Countries !== null && $this->importIso3Countries !== null) {
             return $this;
         }
 
-        $this->_importIso2Countries = [];
-        $this->_importIso3Countries = [];
+        $this->importIso2Countries = [];
+        $this->importIso3Countries = [];
 
         /** @var $collection \Magento\Directory\Model\ResourceModel\Country\Collection */
-        $collection = $this->_countryCollectionFactory->create();
+        $collection = $this->countryCollectionFactory->create();
         foreach ($collection->getData() as $row) {
-            $this->_importIso2Countries[$row['iso2_code']] = $row['country_id'];
-            $this->_importIso3Countries[$row['iso3_code']] = $row['country_id'];
+            $this->importIso2Countries[$row['iso2_code']] = $row['country_id'];
+            $this->importIso3Countries[$row['iso3_code']] = $row['country_id'];
         }
 
         return $this;
@@ -440,16 +446,16 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _loadDirectoryRegions()
     {
-        if ($this->_importRegions !== null) {
+        if ($this->importRegions !== null) {
             return $this;
         }
 
-        $this->_importRegions = [];
+        $this->importRegions = [];
 
         /** @var $collection \Magento\Directory\Model\ResourceModel\Region\Collection */
-        $collection = $this->_regionCollectionFactory->create();
+        $collection = $this->regionCollectionFactory->create();
         foreach ($collection->getData() as $row) {
-            $this->_importRegions[$row['country_id']][$row['code']] = (int)$row['region_id'];
+            $this->importRegions[$row['country_id']][$row['code']] = (int)$row['region_id'];
         }
 
         return $this;
@@ -461,19 +467,19 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param string $conditionName
      * @return string
      */
-    protected function _getConditionFullName($conditionName)
+    protected function getConditionFullName($conditionName)
     {
-        if (!isset($this->_conditionFullNames[$conditionName])) {
-            $name = $this->_carrierMatrixrate->getCode('condition_name_short', $conditionName);
-            $this->_conditionFullNames[$conditionName] = $name;
+        if (!isset($this->conditionFullNames[$conditionName])) {
+            $name = $this->carrierMatrixrate->getCode('condition_name_short', $conditionName);
+            $this->conditionFullNames[$conditionName] = $name;
         }
 
-        return $this->_conditionFullNames[$conditionName];
+        return $this->conditionFullNames[$conditionName];
     }
 
     /**
      * Validate row for import and return table rate array or false
-     * Error will be add to _importErrors array
+     * Error will be add to importErrors array
      *
      * @param array $row
      * @param int $rowNumber
@@ -485,7 +491,8 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         // validate row
         if (count($row) < 7) {
-            $this->_importErrors[] = __('Please correct Matrix Rates format in Row #%1. Invalid Number of Rows', $rowNumber);
+            $this->importErrors[] =
+                __('Please correct Matrix Rates format in Row #%1. Invalid Number of Rows', $rowNumber);
             return false;
         }
 
@@ -495,24 +502,24 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         // validate country
-        if (isset($this->_importIso2Countries[$row[0]])) {
-            $countryId = $this->_importIso2Countries[$row[0]];
-        } elseif (isset($this->_importIso3Countries[$row[0]])) {
-            $countryId = $this->_importIso3Countries[$row[0]];
+        if (isset($this->importIso2Countries[$row[0]])) {
+            $countryId = $this->importIso2Countries[$row[0]];
+        } elseif (isset($this->importIso3Countries[$row[0]])) {
+            $countryId = $this->importIso3Countries[$row[0]];
         } elseif ($row[0] == '*' || $row[0] == '') {
             $countryId = '0';
         } else {
-            $this->_importErrors[] = __('Please correct Country "%1" in Row #%2.', $row[0], $rowNumber);
+            $this->importErrors[] = __('Please correct Country "%1" in Row #%2.', $row[0], $rowNumber);
             return false;
         }
 
         // validate region
-        if ($countryId != '0' && isset($this->_importRegions[$countryId][$row[1]])) {
-            $regionId = $this->_importRegions[$countryId][$row[1]];
+        if ($countryId != '0' && isset($this->importRegions[$countryId][$row[1]])) {
+            $regionId = $this->importRegions[$countryId][$row[1]];
         } elseif ($row[1] == '*' || $row[1] == '') {
             $regionId = 0;
         } else {
-            $this->_importErrors[] = __('Please correct Region/State "%1" in Row #%2.', $row[1], $rowNumber);
+            $this->importErrors[] = __('Please correct Region/State "%1" in Row #%2.', $row[1], $rowNumber);
             return false;
         }
 
@@ -523,7 +530,6 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $city = $row[2];
         }
 
-
         // detect zip code
         if ($row[3] == '*' || $row[3] == '') {
             $zipCode = '*';
@@ -531,9 +537,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $zipCode = $row[3];
         }
 
-        //zip from
-
-
+        //zip to
         if ($row[4] == '*' || $row[4] == '') {
             $zip_to = '';
         } else {
@@ -541,48 +545,56 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         // validate condition from value
-        $valueFrom = $this->_parseDecimalValue($row[5]);
+        $valueFrom = $row[5] == '*' ? -1 : $this->_parseDecimalValue($row[5]);
         if ($valueFrom === false) {
-            $this->_importErrors[] = __(
+            $this->importErrors[] = __(
                 'Please correct %1 From "%2" in Row #%3.',
-                $this->_getConditionFullName($this->_importConditionName),
+                $this->getConditionFullName($this->importConditionName),
                 $row[5],
                 $rowNumber
             );
             return false;
         }
         // validate conditionto to value
-        $valueTo = $this->_parseDecimalValue($row[6]);
+        $valueTo = $row[6] == '*' ? 10000000 :$this->_parseDecimalValue($row[6]);
         if ($valueTo === false) {
-            $this->_importErrors[] = __(
+            $this->importErrors[] = __(
                 'Please correct %1 To "%2" in Row #%3.',
-                $this->_getConditionFullName($this->_importConditionName),
+                $this->getConditionFullName($this->importConditionName),
                 $row[6],
                 $rowNumber
             );
             return false;
         }
 
-
         // validate price
         $price = $this->_parseDecimalValue($row[7]);
         if ($price === false) {
-            $this->_importErrors[] = __('Please correct Shipping Price "%1" in Row #%2.', $row[7], $rowNumber);
+            $this->importErrors[] = __('Please correct Shipping Price "%1" in Row #%2.', $row[7], $rowNumber);
             return false;
         }
 
         // validate shipping method
         if ($row[8] == '*' || $row[8] == '') {
-            $this->_importErrors[] = __('Please correct Shipping Method "%1" in Row #%2.', $row[8], $rowNumber);
+            $this->importErrors[] = __('Please correct Shipping Method "%1" in Row #%2.', $row[8], $rowNumber);
             return false;
         } else {
             $shippingMethod = $row[8];
         }
 
         // protect from duplicate
-        $hash = sprintf("%s-%d-%s-%s-%F-%F-%s", $countryId, $city, $regionId, $zipCode, $valueFrom, $valueTo,$shippingMethod );
-        if (isset($this->_importUniqueHash[$hash])) {
-            $this->_importErrors[] = __(
+        $hash = sprintf(
+            "%s-%s-%s-%s-%F-%F-%s",
+            $countryId,
+            $city,
+            $regionId,
+            $zipCode,
+            $valueFrom,
+            $valueTo,
+            $shippingMethod
+        );
+        if (isset($this->importUniqueHash[$hash])) {
+            $this->importErrors[] = __(
                 'Duplicate Row #%1 (Country "%2", Region/State "%3", City "%4", Zip from "%5", Zip to "%6", From Value "%7", To Value "%8", and Shipping Method "%9")',
                 $rowNumber,
                 $row[0],
@@ -596,21 +608,21 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             );
             return false;
         }
-        $this->_importUniqueHash[$hash] = true;
+        $this->importUniqueHash[$hash] = true;
 
         return [
-            $this->_importWebsiteId,    // website_id
+            $this->importWebsiteId,    // website_id
             $countryId,                 // dest_country_id
             $regionId,                  // dest_region_id,
             $city,                      // city,
             $zipCode,                   // dest_zip
             $zip_to,                    //zip to
-            $this->_importConditionName,// condition_name,
+            $this->importConditionName,// condition_name,
             $valueFrom,                 // condition_value From
             $valueTo,                   // condition_value To
             $price,                     // price
             $shippingMethod
-       ];
+        ];
     }
 
     /**
@@ -636,7 +648,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 'shipping_method',
             ];
             $this->getConnection()->insertArray($this->getMainTable(), $columns, $data);
-            $this->_importedRows += count($data);
+            $this->importedRows += count($data);
         }
 
         return $this;

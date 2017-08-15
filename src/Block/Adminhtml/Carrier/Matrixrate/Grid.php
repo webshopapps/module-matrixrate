@@ -40,24 +40,24 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      *
      * @var int
      */
-    protected $_websiteId;
+    protected $websiteId;
 
     /**
      * Condition filter
      *
      * @var string
      */
-    protected $_conditionName;
+    protected $conditionName;
 
     /**
      * @var \WebShopApps\MatrixRate\Model\Carrier\Matrixrate
      */
-    protected $_matrixrate;
+    protected $matrixrate;
 
     /**
      * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate\CollectionFactory
      */
-    protected $_collectionFactory;
+    protected $collectionFactory;
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
@@ -73,8 +73,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         \WebShopApps\MatrixRate\Model\Carrier\Matrixrate $matrixrate,
         array $data = []
     ) {
-        $this->_collectionFactory = $collectionFactory;
-        $this->_matrixrate = $matrixrate;
+        $this->collectionFactory = $collectionFactory;
+        $this->matrixrate = $matrixrate;
         parent::__construct($context, $backendHelper, $data);
     }
 
@@ -98,7 +98,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function setWebsiteId($websiteId)
     {
-        $this->_websiteId = $this->_storeManager->getWebsite($websiteId)->getId();
+        $this->websiteId = $this->_storeManager->getWebsite($websiteId)->getId();
         return $this;
     }
 
@@ -109,10 +109,10 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getWebsiteId()
     {
-        if ($this->_websiteId === null) {
-            $this->_websiteId = $this->_storeManager->getWebsite()->getId();
+        if ($this->websiteId === null) {
+            $this->websiteId = $this->_storeManager->getWebsite()->getId();
         }
-        return $this->_websiteId;
+        return $this->websiteId;
     }
 
     /**
@@ -123,7 +123,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function setConditionName($name)
     {
-        $this->_conditionName = $name;
+        $this->conditionName = $name;
         return $this;
     }
 
@@ -134,7 +134,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getConditionName()
     {
-        return $this->_conditionName;
+        return $this->conditionName;
     }
 
     /**
@@ -145,7 +145,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected function _prepareCollection()
     {
         /** @var $collection \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate\Collection */
-        $collection = $this->_collectionFactory->create();
+        $collection = $this->collectionFactory->create();
         $collection->setConditionFilter($this->getConditionName())->setWebsiteFilter($this->getWebsiteId());
 
         $this->setCollection($collection);
@@ -182,8 +182,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             ['header' => __('Zip/Postal Code To'), 'index' => 'dest_zip_to', 'default' => '*']
         );
 
-
-        $label = $this->_matrixrate->getCode('condition_name_short', $this->getConditionName());
+        $label = $this->matrixrate->getCode('condition_name_short', $this->getConditionName());
 
         $this->addColumn(
             'condition_from_value',
