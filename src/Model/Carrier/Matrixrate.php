@@ -191,7 +191,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
                 $method->setCarrier('matrixrate');
                 $method->setCarrierTitle($this->getConfigData('title'));
 
-                $method->setMethod('matrixrate_' . $rate['pk']);
+                $method->setMethod('matrixrate_' . $rate['dest_country_id'].($rate['price']*100));
                 $method->setMethodTitle(__($rate['shipping_method']));
 
                 if ($request->getFreeShipping() === true || $request->getPackageQty() == $freeQty) {
