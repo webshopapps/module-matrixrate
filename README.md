@@ -12,7 +12,7 @@ The MatrixRate shipping extension is the original Magento solution that enables 
 
 Compatibility
 -------------
-- Magento >= 2.0
+- Magento >= 2.0 (Includes 2.2)
 
 This library aims to support and is tested against the following PHP
 implementations:
