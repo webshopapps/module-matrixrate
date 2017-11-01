@@ -584,7 +584,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         // protect from duplicate
         $hash = sprintf(
-            "%s-%d-%s-%s-%F-%F-%s",
+            "%s-%s-%s-%s-%F-%F-%s",
             $countryId,
             $city,
             $regionId,
