@@ -12,9 +12,9 @@ The MatrixRate shipping extension is the original Magento solution that enables 
 
 Compatibility
 -------------
-- Magento >= 2.0
+- Magento >= 2.0 (Includes 2.2)
 
-This library aims to support and is tested against the following PHP
+This library aims to support and is [tested against][travis] the following PHP
 implementations:
 
 * PHP 5.5
@@ -30,12 +30,28 @@ Install using composer by adding to your composer file using commands:
 2. composer update
 3. bin/magento setup:upgrade
 
+Full instructions are also available in our [online documentation](http://docs.shipperhq.com/installing-the-magento-2-webshopapps-matrixrate-extension/).
+
 Support
 -------
-For further information on using Matrixrates, please refer to our [online documentation](http://support.webshopapps.com/matrixrate/).
-If you have any issues with this extension, open an issue on [GitHub](https://github.com/webshopapps/module-matrixrate/issues).
+For further information on using Matrixrates, please refer to our [online documentation](http://docs.shipperhq.com/category/troubleshooting/ecommerce-platform/matrixrates/).
+If you have any issues with this extension, open an issue on [GitHub](https://github.com/webshopapps/module-matrixrate/issues). Alternatively you can contact us via email at support@webshopapps.com or via our website http://webshopapps.com/contacts/
+ 
 
+WebShopApps MatrixRates is provided AS IS and we are not accepting feature requests at this time. Extended functionality is available via [ShipperHQ](https://www.shipperhq.com).
 
+Magento Issues Impacting MatrixRates
+-------
+1. Magento v2.1.3 - Website specific shipping rates or configuration are not working
+    - Github Issue: https://github.com/magento/magento2/issues/7840
+    - Related Issue: https://github.com/magento/magento2/issues/7943
+    - Code change required to fix: https://github.com/magento/magento2/issues/7943#issuecomment-269508822
+2. Only country, region and postcode are included in shipping request at checkout - you may not see correct rates returned if filtering on city or PO box addresses
+    - Github Issue: https://github.com/magento/magento2/issues/3789
+    - Resolved in Magento 2.1 and above for Guest checkout, logged in customers will still only see region/state, postcode and country
+3. Error thrown when placing an order with some shipping methods. Root cause is that some shipping methods have shipping method codes longer than the column length on quote for shipping_method field. Field is truncating the code and order cannot be placed. 
+   - Github Issue: https://github.com/magento/magento2/issues/6475
+ 
 Credits
 ---------
 This extension borrows heavily from the Tablerate capability in Magento2.  In order to keep codebase as bug-free and
@@ -51,11 +67,6 @@ Assistance around composer, Magento2 structure, etc was also taken from these so
 * [https://github.com/Genmato/MultiStoreSearchFields](http://)
 * [https://alankent.wordpress.com/2014/08/03/creating-a-magento-2-composer-module/](http://)
 * [https://github.com/SchumacherFM/mage2-advanced-rest-permissions](http://)
-
-Support
--------
-If you have any issues with this extension, open an issue on [GitHub](https://github.com/webshopapps/module-matrixrate/issues).
-Alternatively you can contact us via email at support@webshopapps.com or via our website http://webshopapps.com/contacts/
 
 Contribution
 ------------

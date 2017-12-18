@@ -43,7 +43,7 @@ class Export extends \Magento\Framework\Data\Form\Element\AbstractElement
     /**
      * @var \Magento\Backend\Model\UrlInterface
      */
-    protected $_backendUrl;
+    protected $backendUrl;
 
     /**
      * @param \Magento\Framework\Data\Form\Element\Factory $factoryElement
@@ -60,7 +60,7 @@ class Export extends \Magento\Framework\Data\Form\Element\AbstractElement
         array $data = []
     ) {
         parent::__construct($factoryElement, $factoryCollection, $escaper, $data);
-        $this->_backendUrl = $backendUrl;
+        $this->backendUrl = $backendUrl;
     }
 
     /**
@@ -73,12 +73,12 @@ class Export extends \Magento\Framework\Data\Form\Element\AbstractElement
 
         $params = ['website' => $buttonBlock->getRequest()->getParam('website')];
 
-        $url = $this->_backendUrl->getUrl("shqmatrixrate/system/exportMatrixrates", $params);
+        $url = $this->backendUrl->getUrl("shqmatrixrate/system/exportMatrixrates", $params);
         $data = [
             'label' => __('Export CSV'),
             'onclick' => "setLocation('" .
             $url .
-            "conditionName/' + $('carriers_matrixrate_condition_name').value + '/matrixrates.csv' )",
+            "conditionName/' + $('carriers_matrixrate_condition_name').value)",
             'class' => '',
         ];
 

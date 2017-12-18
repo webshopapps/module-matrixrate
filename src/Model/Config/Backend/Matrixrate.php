@@ -45,7 +45,7 @@ class Matrixrate extends \Magento\Framework\App\Config\Value
     /**
      * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory
      */
-    protected $_matrixrateFactory;
+    protected $matrixrateFactory;
 
     /**
      * @param \Magento\Framework\Model\Context $context
@@ -67,7 +67,7 @@ class Matrixrate extends \Magento\Framework\App\Config\Value
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
-        $this->_matrixrateFactory = $matrixrateFactory;
+        $this->matrixrateFactory = $matrixrateFactory;
         parent::__construct($context, $registry, $config, $cacheTypeList, $resource, $resourceCollection, $data);
     }
 
@@ -77,7 +77,7 @@ class Matrixrate extends \Magento\Framework\App\Config\Value
     public function afterSave()
     {
         /** @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate $matrixRate */
-        $matrixRate = $this->_matrixrateFactory->create();
+        $matrixRate = $this->matrixrateFactory->create();
         $matrixRate->uploadAndImport($this);
         return parent::afterSave();
     }

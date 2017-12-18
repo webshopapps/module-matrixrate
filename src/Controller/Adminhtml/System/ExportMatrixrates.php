@@ -42,12 +42,12 @@ class ExportMatrixrates extends \Magento\Config\Controller\Adminhtml\System\Abst
     /**
      * @var \Magento\Framework\App\Response\Http\FileFactory
      */
-    protected $_fileFactory;
+    protected $fileFactory;
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    protected $_storeManager;
+    protected $storeManager;
 
     /**
      * @param \Magento\Backend\App\Action\Context $context
@@ -63,8 +63,8 @@ class ExportMatrixrates extends \Magento\Config\Controller\Adminhtml\System\Abst
         \Magento\Framework\App\Response\Http\FileFactory $fileFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
-        $this->_storeManager = $storeManager;
-        $this->_fileFactory = $fileFactory;
+        $this->storeManager = $storeManager;
+        $this->fileFactory = $fileFactory;
         parent::__construct($context, $configStructure, $sectionChecker);
     }
 
@@ -80,7 +80,7 @@ class ExportMatrixrates extends \Magento\Config\Controller\Adminhtml\System\Abst
         $gridBlock = $this->_view->getLayout()->createBlock(
             'WebShopApps\MatrixRate\Block\Adminhtml\Carrier\Matrixrate\Grid'
         );
-        $website = $this->_storeManager->getWebsite($this->getRequest()->getParam('website'));
+        $website = $this->storeManager->getWebsite($this->getRequest()->getParam('website'));
         if ($this->getRequest()->getParam('conditionName')) {
             $conditionName = $this->getRequest()->getParam('conditionName');
         } else {
@@ -88,6 +88,6 @@ class ExportMatrixrates extends \Magento\Config\Controller\Adminhtml\System\Abst
         }
         $gridBlock->setWebsiteId($website->getId())->setConditionName($conditionName);
         $content = $gridBlock->getCsvFile();
-        return $this->_fileFactory->create($fileName, $content, DirectoryList::VAR_DIR);
+        return $this->fileFactory->create($fileName, $content, DirectoryList::VAR_DIR);
     }
 }
