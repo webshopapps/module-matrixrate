@@ -38,4 +38,7 @@ M2-23 remove crontab file, not required, M2-20 account for upload when no upload
 ## 20.1.0
 M2-23 remove crontab file
 
-## 20.2.1\nUpdated Readme\n\n
+## 20.2.2
+SHQ16-2486 Fix rate matching when using country,region,post,w/o city
+
+
