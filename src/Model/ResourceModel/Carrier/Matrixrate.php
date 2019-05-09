@@ -285,7 +285,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
             $bind[':website_id'] = (int)$request->getWebsiteId();
             $bind[':condition_name'] = $request->getConditionMRName();
-            $bind[':condition_value'] = $request->getData($request->getConditionMRName());
+            $bind[':condition_value'] = floatval($request->getData($request->getConditionMRName()));
 
             $select->where('condition_name = :condition_name');
             $select->where('condition_from_value < :condition_value');
