@@ -38,7 +38,11 @@ M2-23 remove crontab file, not required, M2-20 account for upload when no upload
 ## 20.1.0
 M2-23 remove crontab file
 
-## 20.2.2
-SHQ16-2486 Fix rate matching when using country,region,post,w/o city
+## 20.2.3 (2019-05-09)
+SHQ18-1978 Trim postcode and ensure condition value is not null
+
+
+## 20.1.5 (2019-05-09)
+SHQ18-1978 Trim postcode and ensure condition value is not null
 
 

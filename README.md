@@ -12,15 +12,19 @@ The MatrixRate shipping extension is the original Magento solution that enables 
 
 Compatibility
 -------------
-- Magento >= 2.0 (Includes 2.2)
+- Magento >= 2.0 (Includes 2.3)
 
-This library aims to support and is [tested against][travis] the following PHP
+This library aims to support and is tested against the following PHP
 implementations:
 
 * PHP 5.5
 * PHP 5.6
 * PHP 5.7
-enforced in the composer.json
+* PHP 7.0
+* PHP 7.1
+* PHP 7.2
+
+per the [official Magento 2 requirements](https://devdocs.magento.com/guides/v2.0/install-gde/system-requirements-tech.html)
 
 Installation Instructions
 -------------------------
@@ -42,7 +46,7 @@ WebShopApps MatrixRates is provided AS IS and we are not accepting feature reque
 
 Magento Issues Impacting MatrixRates
 -------
-1. Magento v2.1.3 - Website specific shipping rates or configuration are not working
+1. Magento v2.1.3 - Website specific shipping rates or configuration are not working - you may not see any rates when placing an order via the admin panel
     - Github Issue: https://github.com/magento/magento2/issues/7840
     - Related Issue: https://github.com/magento/magento2/issues/7943
     - Code change required to fix: https://github.com/magento/magento2/issues/7943#issuecomment-269508822

@@ -191,21 +191,24 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_init('webshopapps_matrixrate', 'pk');
     }
 
-    /**
-     * Return table rate array or false by rate request
-     *
-     * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
-     * @param bool $zipRangeSet
-     * @return array|bool
-     */
+	/**
+	 * Return table rate array or false by rate request
+	 *
+	 * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
+	 * @param bool                                           $zipRangeSet
+	 *
+	 * @return array|bool
+	 * @throws \Magento\Framework\Exception\LocalizedException
+	 * @throws \Zend_Db_Select_Exception
+	 */
     public function getRate(\Magento\Quote\Model\Quote\Address\RateRequest $request, $zipRangeSet = false)
     {
         $adapter = $this->getConnection();
         $shippingData=[];
-        $postcode = trim($request->getDestPostcode());
+        $postcode = trim($request->getDestPostcode()); //SHQ18-1978
         if ($zipRangeSet && is_numeric($postcode)) {
-            #  Want to search for postcodes within a range
-            $zipSearchString = ' AND :postcode BETWEEN dest_zip AND dest_zip_to ';
+			#  Want to search for postcodes within a range. SHQ18-98 Can't use bind. Will convert int to string
+			$zipSearchString = ' AND ' .(int)$postcode. ' BETWEEN dest_zip AND dest_zip_to ';
         } else {
             $zipSearchString = " AND :postcode LIKE dest_zip ";
         }
@@ -228,7 +231,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                         ':country_id' => $request->getDestCountryId(),
                         ':region_id' => (int)$request->getDestRegionId(),
                         ':city' => $request->getDestCity(),
-                        ':postcode' => trim($request->getDestPostcode()),
+                        ':postcode' => $postcode,
                     ];
                     break;
                 case 1: // country, region, no city, postcode
@@ -237,7 +240,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':region_id' => (int)$request->getDestRegionId(),
-                        ':postcode' => trim($request->getDestPostcode()),
+                        ':postcode' => $postcode,
                     ];
                     break;
                 case 2: // country, state, city, no postcode
@@ -260,7 +263,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                         .$zipSearchString;
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
-                        ':postcode' => trim($request->getDestPostcode()),
+                        ':postcode' => $postcode,
                     ];
                     break;
                 case 5: // country, region
@@ -285,7 +288,15 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
             $bind[':website_id'] = (int)$request->getWebsiteId();
             $bind[':condition_name'] = $request->getConditionMRName();
-            $bind[':condition_value'] = floatval($request->getData($request->getConditionMRName()));
+
+            //SHQ18-1978
+            $condition = $request->getData($request->getConditionMRName());
+
+            if ($condition == null || $condition == "") {
+                $condition = 0;
+            }
+
+            $bind[':condition_value'] = $condition;
 
             $select->where('condition_name = :condition_name');
             $select->where('condition_from_value < :condition_value');
@@ -308,15 +319,16 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         return $shippingData;
     }
 
-    /**
-     * Upload table rate file and import data from it
-     *
-     * @param \Magento\Framework\Object $object
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @return \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
-     */
+	/**
+	 * Upload table rate file and import data from it
+	 *
+	 * @param \Magento\Framework\DataObject $object
+	 *
+	 * @return \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate
+	 * @throws \Magento\Framework\Exception\LocalizedException
+	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+	 * @SuppressWarnings(PHPMD.NPathComplexity)
+	 */
     public function uploadAndImport(\Magento\Framework\DataObject $object)
     {
         //M2-24
@@ -625,12 +637,14 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         ];
     }
 
-    /**
-     * Save import data batch
-     *
-     * @param array $data
-     * @return \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate
-     */
+	/**
+	 * Save import data batch
+	 *
+	 * @param array $data
+	 *
+	 * @return \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate
+	 * @throws \Magento\Framework\Exception\LocalizedException
+	 */
     protected function _saveImportData(array $data)
     {
         if (!empty($data)) {
