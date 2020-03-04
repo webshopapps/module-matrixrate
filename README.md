@@ -23,6 +23,7 @@ implementations:
 * PHP 7.0
 * PHP 7.1
 * PHP 7.2
+* PHP 7.3
 
 per the [official Magento 2 requirements](https://devdocs.magento.com/guides/v2.0/install-gde/system-requirements-tech.html)
 
