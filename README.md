@@ -1,5 +1,5 @@
 # ShipperHQ and WebShopApps MatrixRate
-A Shipping Rate module for Magento 2.x which supports showing multiple shipping methods.  This is based on the Magento Tablerate module and is managed via a csv file.
+A Shipping Rate module for Magento 2.3+ which supports showing multiple shipping methods. This is based on the Magento Tablerate module and is managed via a csv file.
 
 Facts
 -----
@@ -12,20 +12,16 @@ The MatrixRate shipping extension is the original Magento solution that enables 
 
 Compatibility
 -------------
-- Magento >= 2.0 (Includes 2.3)
+- Magento >= 2.3
 
 This library aims to support and is tested against the following PHP
 implementations:
 
-* PHP 5.5
-* PHP 5.6
-* PHP 5.7
-* PHP 7.0
-* PHP 7.1
-* PHP 7.2
-* PHP 7.3
+* PHP 7.1.3
+* PHP 7.2.0
+* PHP 7.3.0
 
-per the [official Magento 2 requirements](https://devdocs.magento.com/guides/v2.0/install-gde/system-requirements-tech.html)
+per the [official Magento 2 requirements](https://devdocs.magento.com/guides/v2.3/install-gde/system-requirements-tech.html)
 
 Installation Instructions
 -------------------------
@@ -79,8 +75,7 @@ Any contribution is highly appreciated. The best way to contribute code is to op
 
 License
 -------
-Copyright (c) 2015 Zowta LLC & Zowta Ltd. See [LICENSE][] for
-details.
+Copyright (c) 2020 Zowta LLC & Zowta Ltd. See [LICENSE][] for details.
 
 We also dutifully respect the [Magento][] OSL license, which is included in this codebase.
 
@@ -90,6 +85,6 @@ We also dutifully respect the [Magento][] OSL license, which is included in this
 
 Copyright
 ---------
-Copyright (c) 2015 Zowta LLC & Zowta Ltd.
+Copyright (c) 2020 Zowta LLC & Zowta Ltd.
 
 

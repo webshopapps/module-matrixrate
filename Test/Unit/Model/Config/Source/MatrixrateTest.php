@@ -32,9 +32,10 @@
  * See COPYING.txt for license details.
  */
 namespace WebShopApps\MatrixRate\Test\Unit\Model\Config\Source;
+
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 
-class MatrixrateTest extends \PHPUnit_Framework_TestCase
+class MatrixrateTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var \WebShopApps\MatrixRate\Model\Config\Source\Matrixrate

@@ -33,9 +33,10 @@
  */
 
 namespace WebShopApps\MatrixRate\Test\Unit\Block\Adminhtml\Carrier\Matrixrate;
+
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 
-class GridTest extends \PHPUnit_Framework_TestCase
+class GridTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var \WebShopApps\MatrixRate\Block\Adminhtml\Carrier\Matrixrate\Grid
