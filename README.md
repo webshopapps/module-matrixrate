@@ -30,15 +30,27 @@ Install using composer by adding to your composer file using commands:
 2. composer update
 3. bin/magento setup:upgrade
 
-Full instructions are also available in our [online documentation](http://docs.shipperhq.com/installing-the-magento-2-webshopapps-matrixrate-extension/).
+
+Configuration
+-------------------------
+MatrixRate is completely CSV driven, no coding required to change prices, add rates, etc
+It allows multiple postage rates to be displayed for the customer to choose in particular country/city/region/ZIP code/condition range, where condition can be weight, price or #items. The management of shipping rates is done via a CSV file, which is uploaded to the database. Shipping calculations are then done via SQL searches, providing efficient results. 
+
+To get started you will need to: 
+
+1. Create your CSV file of shipping rates. Please follow [the format of the CSV file described in our online docs](https://docs.shipperhq.com/matrixrates-csv-configuration). We also have [many example CSVs](https://docs.shipperhq.com/matrixrates-examples-city-based)  to get you started
+2. Import the CSV file by [following the instructions in our online docs](https://docs.shipperhq.com/1878-2/#How_to_Upload_a_CSV_File)
+
+For more information on MatrixRate capabilities and configuration see the [MatrixRate Overview](https://docs.shipperhq.com/matrixrates-overview)
+
+WebShopApps MatrixRates is provided AS IS and we are not accepting feature requests at this time. Extended functionality is available via [ShipperHQ](https://www.shipperhq.com).
 
 Support
 -------
-For further information on using Matrixrates, please refer to our [online documentation](http://docs.shipperhq.com/category/troubleshooting/ecommerce-platform/matrixrates/).
-If you have any issues with this extension, open an issue on [GitHub](https://github.com/webshopapps/module-matrixrate/issues). Alternatively you can contact us via email at support@webshopapps.com or via our website http://webshopapps.com/contacts/
- 
+For further information on using Matrixrate, please refer to our [online documentation](https://docs.shipperhq.com/matrixrates-overview)
+If you have any issues with this extension, open an issue on [GitHub](https://github.com/webshopapps/module-matrixrate/issues).
+Alternatively you can contact us via email at support@webshopapps.com or via our website http://webshopapps.com/contacts/
 
-WebShopApps MatrixRates is provided AS IS and we are not accepting feature requests at this time. Extended functionality is available via [ShipperHQ](https://www.shipperhq.com).
 
 Magento Issues Impacting MatrixRates
 -------
@@ -68,6 +80,8 @@ Assistance around composer, Magento2 structure, etc was also taken from these so
 * [https://alankent.wordpress.com/2014/08/03/creating-a-magento-2-composer-module/](http://)
 * [https://github.com/SchumacherFM/mage2-advanced-rest-permissions](http://)
 
+=======
+
 Contribution
 ------------
 Any contribution is highly appreciated. The best way to contribute code is to open a [pull request on GitHub](https://help.github.com/articles/using-pull-requests).
@@ -83,8 +97,5 @@ We also dutifully respect the [Magento][] OSL license, which is included in this
 [license]: LICENSE.md
 [magento]: Magento2_LICENSE.md
 
-Copyright
----------
-Copyright (c) 2015 Zowta LLC & Zowta Ltd.
 
 
