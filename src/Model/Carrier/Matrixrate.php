@@ -241,18 +241,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
      */
     public function getCode($type, $code = '')
     {
-        $codes = [
-            'condition_name' => [
-                'package_weight' => __('Weight vs. Destination'),
-                'package_value' => __('Order Subtotal vs. Destination'),
-                'package_qty' => __('# of Items vs. Destination'),
-            ],
-            'condition_name_short' => [
-                'package_weight' => __('Weight'),
-                'package_value' => __('Order Subtotal'),
-                'package_qty' => __('# of Items'),
-            ],
-        ];
+        $codes = $this->getRawCodes();
 
         if (!isset($codes[$type])) {
             throw new LocalizedException(__('Please correct Matrix Rate code type: %1.', $type));
@@ -267,6 +256,25 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
         }
 
         return $codes[$type][$code];
+    }
+
+    /**
+     * @return array
+     */
+    public function getRawCodes(): array
+    {
+        return [
+            'condition_name' => [
+                'package_weight' => __('Weight vs. Destination'),
+                'package_value' => __('Order Subtotal vs. Destination'),
+                'package_qty' => __('# of Items vs. Destination')
+            ],
+            'condition_name_short' => [
+                'package_weight' => __('Weight'),
+                'package_value' => __('Order Subtotal'),
+                'package_qty' => __('# of Items')
+            ]
+        ];
     }
 
     /**
