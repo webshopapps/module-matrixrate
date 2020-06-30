@@ -31,6 +31,17 @@ Install using composer by adding to your composer file using commands:
 2. composer update
 3. bin/magento setup:upgrade
 
+Configuration
+-------------------------
+MatrixRate is completely CSV driven, no coding required to change prices, add rates, etc
+It allows multiple postage rates to be displayed for the customer to choose in particular country/city/region/ZIP code/condition range, where condition can be weight, price or #items. The management of shipping rates is done via a CSV file, which is uploaded to the database. Shipping calculations are then done via SQL searches, providing efficient results. 
+
+To get started you will need to: 
+
+1. Create your CSV file of shipping rates. Please follow [the format of the CSV file described in our online docs](https://docs.shipperhq.com/matrixrates-csv-configuration). We also have [many example CSVs](https://docs.shipperhq.com/matrixrates-examples-city-based)  to get you started
+2. Import the CSV file by [following the instructions in our online docs](https://docs.shipperhq.com/1878-2/#How_to_Upload_a_CSV_File)
+
+
 Full instructions are also available in our [online documentation](http://docs.shipperhq.com/installing-the-magento-2-webshopapps-matrixrate-extension/).
 
 Support

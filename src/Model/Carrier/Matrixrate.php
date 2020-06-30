@@ -259,6 +259,8 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
     }
 
     /**
+     * Thanks to https://github.com/JeroenVanLeusden for this user submitted enhancement
+     *
      * @return array
      */
     public function getRawCodes(): array
