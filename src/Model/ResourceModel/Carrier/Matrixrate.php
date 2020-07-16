@@ -557,6 +557,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         // validate condition from value
+        // MNB-472 Thanks to https://github.com/JeroenVanLeusden for the enhancement to accept -1
         $valueFrom = $row[5] == '*' || $row[5] == -1 ? -1 : $this->_parseDecimalValue($row[5]);
         if ($valueFrom === false) {
             $this->importErrors[] = __(
