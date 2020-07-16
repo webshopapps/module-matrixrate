@@ -557,7 +557,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         // validate condition from value
-        $valueFrom = $row[5] == '*' ? -1 : $this->_parseDecimalValue($row[5]);
+        $valueFrom = $row[5] == '*' || $row[5] == -1 ? -1 : $this->_parseDecimalValue($row[5]);
         if ($valueFrom === false) {
             $this->importErrors[] = __(
                 'Please correct %1 From "%2" in Row #%3.',
