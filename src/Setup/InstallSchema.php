@@ -75,7 +75,7 @@ class InstallSchema implements InstallSchemaInterface
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
             4,
             ['nullable' => false, 'default' => '0'],
-            'Destination coutry ISO/2 or ISO/3 code'
+            'Destination country ISO/2 or ISO/3 code'
         )->addColumn(
             'dest_region_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,

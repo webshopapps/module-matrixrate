@@ -26,7 +26,6 @@ per the [official Magento 2 requirements](https://devdocs.magento.com/guides/v2.
 Installation Instructions
 -------------------------
 Install using composer by adding to your composer file using commands:
-
 ```
 $ composer require webshopapps/module-matrixrate
 $ composer update
