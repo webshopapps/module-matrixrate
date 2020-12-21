@@ -27,9 +27,11 @@ Installation Instructions
 -------------------------
 Install using composer by adding to your composer file using commands:
 
-1. composer require webshopapps/module-matrixrate
-2. composer update
-3. bin/magento setup:upgrade
+```
+$ composer require webshopapps/module-matrixrate
+$ composer update
+$ bin/magento setup:upgrade
+```
 
 Configuration
 -------------------------
