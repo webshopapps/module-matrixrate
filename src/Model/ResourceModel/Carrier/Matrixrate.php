@@ -375,12 +375,8 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $this->_loadDirectoryCountries();
             $this->_loadDirectoryRegions();
 
-            // delete old data by website and condition name
-            $condition = [
-                'website_id = ?' => $this->importWebsiteId,
-                'condition_name = ?' => $this->importConditionName,
-            ];
-            $adapter->delete($this->getMainTable(), $condition);
+            // Delete old data by website.
+            $adapter->delete($this->getMainTable(), ['website_id = ?' => $this->importWebsiteId]);
 
             while (false !== ($csvLine = $stream->readCsv())) {
                 $rowNumber++;
