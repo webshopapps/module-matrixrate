@@ -33,16 +33,16 @@
  */
 namespace WebShopApps\MatrixRate\Test\Unit\Block\Adminhtml\Form\Field;
 
-use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
+use PHPUnit\Framework\TestCase;
 
-class ExportTest extends \PHPUnit\Framework\TestCase
+class ExportTest extends TestCase
 {
     /**
      * @var \WebShopApps\MatrixRate\Block\Adminhtml\Form\Field\Export
      */
     protected $_object;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $backendUrl = $this->createMock(\Magento\Backend\Model\UrlInterface::class);
         $backendUrl->expects($this->once())->method('getUrl')->with("shqmatrixrate/system/exportMatrixrates", ['website' => 1]);

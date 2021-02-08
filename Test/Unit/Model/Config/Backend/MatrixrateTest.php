@@ -34,8 +34,9 @@
 namespace WebShopApps\MatrixRate\Test\Unit\Model\Config\Backend;
 
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
+use PHPUnit\Framework\TestCase;
 
-class MatrixrateTest extends \PHPUnit\Framework\TestCase
+class MatrixrateTest extends TestCase
 {
     /**
      * @var \WebShopApps\MatrixRate\Model\Config\Backend\Matrixrate
@@ -43,14 +44,14 @@ class MatrixrateTest extends \PHPUnit\Framework\TestCase
     protected $model;
 
     /**
-     * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory|\PHPUnit_Framework_MockObject_MockObject
+     * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $tableateFactoryMock;
 
     /** @var ObjectManagerHelper */
     protected $objectManagerHelper;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->objectManagerHelper = new ObjectManagerHelper($this);
 
