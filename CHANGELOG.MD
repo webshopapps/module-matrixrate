@@ -58,3 +58,7 @@ MNB-455 Submitted by JeroenVanLeusden. Extract condition codes to own method
 MNB-472 PR from JeroenVanLeusden - Accept -1 in condition from value in CSV import
 
 
+## 20.1.9 (2020-12-21)
+MNB-566 Clear down old date when upload new CSV
+
+
