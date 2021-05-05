@@ -213,6 +213,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
                 ]
             );
             $result->append($error);
+            return $result;
         }
 
         // Handle free shipping
