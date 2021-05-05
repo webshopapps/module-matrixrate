@@ -35,6 +35,7 @@ namespace WebShopApps\MatrixRate\Model\Carrier;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Quote\Model\Quote\Address\RateRequest;
+use WebShopApps\MatrixRate\Model\Config\Source\FreeShippingMode;
 
 class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier implements
     \Magento\Shipping\Model\Carrier\CarrierInterface
@@ -192,13 +193,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
                 $method->setMethod('matrixrate_' . $rate['pk']);
                 $method->setMethodTitle(__($rate['shipping_method']));
 
-                if ($request->getFreeShipping() === true || $request->getPackageQty() == $freeQty) {
-                    $shippingPrice = 0;
-                } else {
-                    $shippingPrice = $this->getFinalPriceWithHandlingFee($rate['price']);
-                }
-
-                $method->setPrice($shippingPrice);
+                $method->setPrice($this->getFinalPriceWithHandlingFee($rate['price']));
                 $method->setCost($rate['cost']);
 
                 $result->append($method);
@@ -218,6 +213,22 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
                 ]
             );
             $result->append($error);
+        }
+
+        // Handle free shipping
+        if ($request->getFreeShipping() === true || $request->getPackageQty() == $freeQty) {
+            $freeShippingMode = $this->getConfigData('free_shipping_mode');
+
+            switch ($freeShippingMode) {
+                case FreeShippingMode::MODE_CHEAPEST:
+                    $result->getCheapestRate()->setPrice(0);
+                    break;
+                case FreeShippingMode::MODE_ALL:
+                    foreach ($result->getAllRates() as $rate) {
+                        $rate->setPrice(0);
+                    }
+                    break;
+            }
         }
 
         return $result;

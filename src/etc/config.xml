@@ -46,6 +46,7 @@
                 <title>Select Shipping Method</title>
                 <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
                 <handling_type>F</handling_type>
+                <free_shipping_mode>all</free_shipping_mode>
             </matrixrate>
         </carriers>
     </default>
