@@ -221,7 +221,10 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
 
             switch ($freeShippingMode) {
                 case FreeShippingMode::MODE_CHEAPEST:
-                    $result->getCheapestRate()->setPrice(0);
+                    $cheapestRate = $result->getCheapestRate();
+                    if ($cheapestRate !== null) {
+                        $cheapestRate->setPrice(0);
+                    }
                     break;
                 case FreeShippingMode::MODE_ALL:
                     foreach ($result->getAllRates() as $rate) {
