@@ -32,9 +32,11 @@
  * See COPYING.txt for license details.
  */
 namespace WebShopApps\MatrixRate\Test\Unit\Model\Config\Backend;
-use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 
-class MatrixrateTest extends \PHPUnit_Framework_TestCase
+use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
+use PHPUnit\Framework\TestCase;
+
+class MatrixrateTest extends TestCase
 {
     /**
      * @var \WebShopApps\MatrixRate\Model\Config\Backend\Matrixrate
@@ -42,14 +44,14 @@ class MatrixrateTest extends \PHPUnit_Framework_TestCase
     protected $model;
 
     /**
-     * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory|\PHPUnit_Framework_MockObject_MockObject
+     * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $tableateFactoryMock;
 
     /** @var ObjectManagerHelper */
     protected $objectManagerHelper;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->objectManagerHelper = new ObjectManagerHelper($this);
 
@@ -59,9 +61,11 @@ class MatrixrateTest extends \PHPUnit_Framework_TestCase
             ->setMethods(['create'])
             ->getMock();
 
-        $this->model = $this->objectManagerHelper->getObject('\WebShopApps\MatrixRate\Model\Config\Backend\Matrixrate', [
-            'matrixrateFactory' => $this->tableateFactoryMock
-        ]);
+        $this->model = $this->objectManagerHelper->getObject(
+            '\WebShopApps\MatrixRate\Model\Config\Backend\Matrixrate',
+            ['matrixrateFactory' => $this->tableateFactoryMock
+            ]
+        );
     }
 
     public function testAfterSave()

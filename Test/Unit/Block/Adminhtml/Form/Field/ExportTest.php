@@ -32,28 +32,24 @@
  * See COPYING.txt for license details.
  */
 namespace WebShopApps\MatrixRate\Test\Unit\Block\Adminhtml\Form\Field;
-use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 
-class ExportTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ExportTest extends TestCase
 {
     /**
      * @var \WebShopApps\MatrixRate\Block\Adminhtml\Form\Field\Export
      */
     protected $_object;
 
-    /** @var ObjectManagerHelper */
-    protected $objectManagerHelper;
-
-    protected function setUp()
+    protected function setUp(): void
     {
-        $backendUrl = $this->getMock('Magento\Backend\Model\UrlInterface', [], [], '', false, false);
-        $backendUrl->expects($this->once())->method('getUrl')->with("*/*/exportMatrixrates", ['website' => 1]);
+        $backendUrl = $this->createMock(\Magento\Backend\Model\UrlInterface::class);
+        $backendUrl->expects($this->once())->method('getUrl')->with("shqmatrixrate/system/exportMatrixrates", ['website' => 1]);
 
-       // $objectManager = new \Magento\Framework\TestFramework\Unit\Helper\ObjectManager($this);
-        $this->objectManagerHelper = new ObjectManagerHelper($this);
-
-        $this->_object = $this->objectManagerHelper->getObject(
-            'WebShopApps\MatrixRate\Block\Adminhtml\Form\Field\Export',
+        $objectManager = new \Magento\Framework\TestFramework\Unit\Helper\ObjectManager($this);
+        $this->_object = $objectManager->getObject(
+            \WebShopApps\MatrixRate\Block\Adminhtml\Form\Field\Export::class,
             ['backendUrl' => $backendUrl]
         );
     }
@@ -62,23 +58,16 @@ class ExportTest extends \PHPUnit_Framework_TestCase
     {
         $expected = 'some test data';
 
-        $form = $this->getMock('Magento\Framework\Data\Form', ['getParent'], [], '', false, false);
-        $parentObjectMock = $this->getMock(
-            'Magento\Backend\Block\Template',
-            ['getLayout'],
-            [],
-            '',
-            false,
-            false
-        );
-        $layoutMock = $this->getMock('Magento\Framework\View\Layout', [], [], '', false, false);
+        $form = $this->createPartialMock(\Magento\Framework\Data\Form::class, ['getParent']);
+        $parentObjectMock = $this->createPartialMock(\Magento\Backend\Block\Template::class, ['getLayout']);
+        $layoutMock = $this->createMock(\Magento\Framework\View\Layout::class);
 
-        $blockMock = $this->getMock('Magento\Backend\Block\Widget\Button', [], [], '', false, false);
+        $blockMock = $this->createMock(\Magento\Backend\Block\Widget\Button::class);
 
-        $requestMock = $this->getMock('Magento\Framework\App\RequestInterface', [], [], '', false, false);
+        $requestMock = $this->createMock(\Magento\Framework\App\RequestInterface::class);
         $requestMock->expects($this->once())->method('getParam')->with('website')->will($this->returnValue(1));
 
-        $mockData = $this->getMock('StdClass', ['toHtml']);
+        $mockData = $this->createPartialMock(\stdClass::class, ['toHtml']);
         $mockData->expects($this->once())->method('toHtml')->will($this->returnValue($expected));
 
         $blockMock->expects($this->once())->method('getRequest')->will($this->returnValue($requestMock));

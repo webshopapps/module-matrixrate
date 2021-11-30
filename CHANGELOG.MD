@@ -38,4 +38,31 @@ M2-23 remove crontab file, not required, M2-20 account for upload when no upload
 ## 20.1.0
 M2-23 remove crontab file
 
-## 20.2.1\nUpdated Readme\n\n
+## 20.2.3 (2019-05-09)
+SHQ18-1978 Trim postcode and ensure condition value is not null
+
+
+## 20.1.5 (2019-05-09)
+SHQ18-1978 Trim postcode and ensure condition value is not null
+
+
+## 20.1.6 (2020-05-05)
+MNB-3 Fix MatrixRate unit tests
+
+
+## 20.1.7 (2020-06-30)
+MNB-455 Submitted by JeroenVanLeusden. Extract condition codes to own method
+
+
+## 20.1.8 (2020-07-16)
+MNB-472 PR from JeroenVanLeusden - Accept -1 in condition from value in CSV import
+
+
+## 20.1.9 (2020-12-21)
+MNB-566 Clear down old date when upload new CSV
+
+
+## 20.2.0 (2021-02-08)
+MNB-923 Move DB install to XML. MNB-922 Fix unit tests
+
+

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+  ~ Shipper HQ
+  ~
+  ~ Thanks to https://github.com/mklooss for writing this file
+  ~
+  ~ @category ShipperHQ
+  ~ @package shq
+  ~ @copyright Copyright (c) 2021 Zowta LTD and Zowta LLC (http://www.ShipperHQ.com)
+  ~ @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+  ~ @author ShipperHQ Team sales@shipperhq.com
+  -->
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="webshopapps_matrixrate" comment="WebShopApps MatrixRates" resource="default">
+        <column name="pk" identity="true" nullable="false" padding="10" unsigned="true" xsi:type="int" comment="Primary key" />
+
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="pk"/>
+        </constraint>
+
+        <column name="website_id"           xsi:type="int"      nullable="false" padding="11"             default="0"      comment="Website Id" />
+        <column name="dest_country_id"      xsi:type="varchar"  nullable="false" length="4"               default="0"      comment="Destination coutry ISO/2 or ISO/3 code" />
+        <column name="dest_region_id"       xsi:type="int"      nullable="false" padding="11"             default="0"      comment="Destination Region Id" />
+        <column name="dest_city"            xsi:type="varchar"  nullable="false" length="30"              default=""       comment="Destination City" />
+        <column name="dest_zip"             xsi:type="varchar"  nullable="false" length="10"              default="*"      comment="Destination Post Code (Zip)" />
+        <column name="dest_zip_to"          xsi:type="varchar"  nullable="false" length="10"              default="*"      comment="Destination Post Code To (Zip)" />
+        <column name="condition_name"       xsi:type="varchar"  nullable="false" length="20"                               comment="Rate Condition name" />
+        <column name="condition_from_value" xsi:type="decimal"  nullable="false" scale="4" precision="12" default="0.0000" comment="Rate condition from value" />
+        <column name="condition_to_value"   xsi:type="decimal"  nullable="false" scale="4" precision="12" default="0.0000" comment="Rate condition to value" />
+        <column name="price"                xsi:type="decimal"  nullable="false" scale="4" precision="12" default="0.0000" comment="Price" />
+        <column name="cost"                 xsi:type="decimal"  nullable="false" scale="4" precision="12" default="0.0000" comment="Cost" />
+        <column name="shipping_method"      xsi:type="varchar"  nullable="false" length="255"                              comment="Shipping Method" />
+
+        <constraint xsi:type="unique" referenceId="UNQ_WA_MATRIXRATE_WI_DCI_DRI_DC_CN_CFV_CTV_SM">
+            <column name="website_id" />
+            <column name="dest_country_id" />
+            <column name="dest_region_id" />
+            <column name="dest_city" />
+            <column name="dest_zip" />
+            <column name="condition_name" />
+            <column name="condition_from_value" />
+            <column name="condition_to_value" />
+            <column name="shipping_method" />
+        </constraint>
+    </table>
+</schema>
