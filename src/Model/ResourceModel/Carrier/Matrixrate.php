@@ -202,7 +202,14 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         $adapter = $this->getConnection();
         $shippingData=[];
-        $postcode = $request->getDestPostcode();
+
+        if ($request->getDestCountryId() == 'BR') {
+            #  Brazil can have a hyphen, let's remove it
+            $postcode = trim(str_replace("-","",$request->getDestPostcode()));
+        } else {
+            $postcode = $request->getDestPostcode();
+        }
+
         if ($zipRangeSet && is_numeric($postcode)) {
             #  Want to search for postcodes within a range
             $zipSearchString = ' AND :postcode BETWEEN dest_zip AND dest_zip_to ';
@@ -228,7 +235,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                         ':country_id' => $request->getDestCountryId(),
                         ':region_id' => (int)$request->getDestRegionId(),
                         ':city' => $request->getDestCity(),
-                        ':postcode' => $request->getDestPostcode(),
+                        ':postcode' => $postcode,
                     ];
                     break;
                 case 1: // country, region, no city, postcode
@@ -236,7 +243,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
                         ':region_id' => (int)$request->getDestRegionId(),
-                        ':postcode' => $request->getDestPostcode(),
+                        ':postcode' => $postcode,
                     ];
                     break;
                 case 2: // country, state, city, no postcode
@@ -259,7 +266,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                         .$zipSearchString;
                     $bind = [
                         ':country_id' => $request->getDestCountryId(),
-                        ':postcode' => $request->getDestPostcode(),
+                        ':postcode' => $postcode,
                     ];
                     break;
                 case 5: // country, region
