@@ -204,7 +204,7 @@ class Matrixrate extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         $adapter = $this->getConnection();
         $shippingData=[];
-        $postcode = trim($request->getDestPostcode()); //SHQ18-1978
+        $postcode = trim($request->getDestPostcode() ?? ""); //SHQ18-1978
         if ($zipRangeSet && is_numeric($postcode)) {
             #  Want to search for postcodes within a range. SHQ18-98 Can't use bind. Will convert int to string
             $zipSearchString = ' AND ' . (int)$postcode . ' BETWEEN dest_zip AND dest_zip_to ';
