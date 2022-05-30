@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to Semantic Versioning(http://semver.org/).
 
-## 1.2.1 
+## 1.2.1
 Fixed composer file
 
 ## 1.2.2
@@ -68,21 +68,7 @@ MNB-923 Move DB install to XML. MNB-922 Fix unit tests
 
 ## 20.3.0 (2022-02-23)
 MNB-2125 added support for BR postcode with hyphen
-
-
 ## 20.4.0 (2022-05-30)
-MNB-2539 Add support for Magento 2.4.4
-
-
-## 20.4.1 (2022-05-30)
-MNB-2539 Add support for Magento 2.4.4
-
-
-## 20.4.2 (2022-05-30)
-MNB-2539 Add support for Magento 2.4.4
-
-
-## 20.4.2 (2022-05-30)
 MNB-2539 Add support for Magento 2.4.4
 
 
