@@ -72,3 +72,7 @@ MNB-2125 added support for BR postcode with hyphen
 MNB-2539 Add support for Magento 2.4.4
 
 
+## 20.4.3 (2022-06-21)
+MNB-2539 Add support for Magento 2.4.4
+
+
