@@ -4,7 +4,6 @@ A Shipping Rate module for Magento 2.3+ which supports showing multiple shipping
 Facts
 -----
 - [extension on GitHub](https://github.com/webshopapps/module-matrixrate)
-- Magento v1.0 available for download from www.webshopapps.com
 
 Description
 -----------
@@ -13,13 +12,6 @@ The MatrixRate shipping extension is the original Magento solution that enables 
 Compatibility
 -------------
 - Magento >= 2.3
-
-This library aims to support and is tested against the following PHP
-implementations:
-
-* PHP 7.1.3
-* PHP 7.2.0
-* PHP 7.3.0
 
 per the [official Magento 2 requirements](https://devdocs.magento.com/guides/v2.3/install-gde/system-requirements-tech.html)
 
@@ -48,7 +40,7 @@ Full instructions are also available in our [online documentation](http://docs.s
 Support
 -------
 For further information on using Matrixrates, please refer to our [online documentation](http://docs.shipperhq.com/category/troubleshooting/ecommerce-platform/matrixrates/).
-If you have any issues with this extension, open an issue on [GitHub](https://github.com/webshopapps/module-matrixrate/issues). Alternatively you can contact us via email at support@webshopapps.com or via our website http://webshopapps.com/contacts/
+If you have any issues with this extension, open an issue on [GitHub](https://github.com/webshopapps/module-matrixrate/issues). Alternatively you can contact us via email at support@webshopapps.com
  
 
 WebShopApps MatrixRates is provided AS IS and we are not accepting feature requests at this time. Extended functionality is available via [ShipperHQ](https://www.shipperhq.com).

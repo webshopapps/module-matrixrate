@@ -80,3 +80,7 @@ MNB-2539 Add support for Magento 2.4.4
 SHQ23-433 Better handling of zero conditions
 
 
+## 20.4.5 (2023-12-21)
+SHQ23-1431 Update readme
+
+
