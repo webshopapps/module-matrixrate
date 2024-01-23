@@ -84,3 +84,7 @@ SHQ23-433 Better handling of zero conditions
 SHQ23-1431 Update readme
 
 
+## 20.4.6 (2024-01-23)
+SHQ23-1381 Remove table on module uninstall
+
+
