@@ -179,6 +179,11 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
         $request->setPackageWeight($oldWeight);
         $request->setPackageQty($oldQty);
 
+        //Accounts for no free shipping rate available in webshopapps_matrix table
+        if (empty($rateArray)) {
+            $rateArray = $this->getRate($request, $zipRange);
+        }
+
         $foundRates = false;
 
         foreach ($rateArray as $rate) {
