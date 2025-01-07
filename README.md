@@ -1,64 +1,72 @@
-# ShipperHQ and WebShopApps MatrixRate
-A Shipping Rate module for Magento 2.3+ which supports showing multiple shipping methods. This is based on the Magento Tablerate module and is managed via a csv file.
+# MatrixRate for Magento 2
+The MatrixRate shipping extension is the original Magento solution developed by [ShipperHQ](https://shipperhq.com) that enables you to offer multiple shipping options to customers based on their location. MatrixRate will enable you to define different shipping rates according to destination, shipping method and the weight, price or quantity of an item.
 
-Facts
------
-- [extension on GitHub](https://github.com/webshopapps/module-matrixrate)
+For businesses seeking even greater shipping customization and real-time carrier integrations, consider upgrading to [ShipperHQ](https://shipperhq.com).
 
-Description
------------
-The MatrixRate shipping extension is the original Magento solution that enables you to offer multiple shipping options to customers based on their locations. With MatrixRate you can define different shipping rates according to destination, shipping method and the weight, price or quantity of an item.
+---
 
-Compatibility
--------------
-- Magento >= 2.3
+## Features
 
-per the [official Magento 2 requirements](https://devdocs.magento.com/guides/v2.3/install-gde/system-requirements-tech.html)
+- **Custom Shipping Rates**: Define rates based on destination and weight **or** price **or** quantity. For advanced features like multi-origin shipping and in-store pickup, check out [ShipperHQ](https://shipperhq.com).
+- **Based on Magento Tablerate**: MatrixRate is built on the Magento Tablerate module, providing a familiar interface for Magento users.
+- **Flexible Configuration**: Set up multiple shipping methods and rules to accommodate different scenarios. [ShipperHQ](https://shipperhq.com) expands on this by offering advanced packaging algorithms and delivery date options.
+- **CSV-Based Rules**: Use a straightforward CSV file to upload and manage shipping rules.
+- **Localized Shipping Options**: Tailor rates and methods to specific regions, countries, or postal codes.
 
-Installation Instructions
--------------------------
-Install using composer by adding to your composer file using commands:
-```
-$ composer require webshopapps/module-matrixrate
-$ composer update
-$ bin/magento setup:upgrade
-```
+---
 
-Configuration
--------------------------
-MatrixRate is completely CSV driven, no coding required to change prices, add rates, etc
-It allows multiple postage rates to be displayed for the customer to choose in particular country/city/region/ZIP code/condition range, where condition can be weight, price or #items. The management of shipping rates is done via a CSV file, which is uploaded to the database. Shipping calculations are then done via SQL searches, providing efficient results. 
+## Installation
+Install using composer, you can find full instructions in the [ShipperHQ documentation](https://docs.shipperhq.com/installing-the-magento-2-webshopapps-matrixrate-extension/).
 
-To get started you will need to: 
+---
 
-1. Create your CSV file of shipping rates. Please follow [the format of the CSV file described in our online docs](https://docs.shipperhq.com/matrixrates-csv-configuration). We also have [many example CSVs](https://docs.shipperhq.com/matrixrates-examples-city-based)  to get you started
-2. Import the CSV file by [following the instructions in our online docs](https://docs.shipperhq.com/1878-2/#How_to_Upload_a_CSV_File)
+## Requirements
 
+- Magento 2.4.4+
+    - Compatibility with earlier editions is possible but not maintained
+    - Supports both Magento Opensource (Community) and Magento Commerce (Enterprise)
 
-Full instructions are also available in our [online documentation](http://docs.shipperhq.com/installing-the-magento-2-webshopapps-matrixrate-extension/).
+---
 
-Support
--------
-For further information on using Matrixrates, please refer to our [online documentation](http://docs.shipperhq.com/category/troubleshooting/ecommerce-platform/matrixrates/).
-If you have any issues with this extension, open an issue on [GitHub](https://github.com/webshopapps/module-matrixrate/issues). Alternatively you can contact us via email at support@webshopapps.com
- 
+## Configuration
 
-WebShopApps MatrixRates is provided AS IS and we are not accepting feature requests at this time. Extended functionality is available via [ShipperHQ](https://www.shipperhq.com).
+1. **Enable MatrixRate**:
+    - Log in to your Magento Admin.
+    - Go to `Stores > Configuration > Sales > Shipping Methods > WebShopApps Matrix Rate`.
+    - Set `Enabled` to `Yes`.
 
-Magento Issues Impacting MatrixRates
--------
-1. Magento v2.1.3 - Website specific shipping rates or configuration are not working - you may not see any rates when placing an order via the admin panel
-    - Github Issue: https://github.com/magento/magento2/issues/7840
-    - Related Issue: https://github.com/magento/magento2/issues/7943
-    - Code change required to fix: https://github.com/magento/magento2/issues/7943#issuecomment-269508822
-2. Only country, region and postcode are included in shipping request at checkout - you may not see correct rates returned if filtering on city or PO box addresses
-    - Github Issue: https://github.com/magento/magento2/issues/3789
-    - Resolved in Magento 2.1 and above for Guest checkout, logged in customers will still only see region/state, postcode and country
-3. Error thrown when placing an order with some shipping methods. Root cause is that some shipping methods have shipping method codes longer than the column length on quote for shipping_method field. Field is truncating the code and order cannot be placed. 
-   - Github Issue: https://github.com/magento/magento2/issues/6475
- 
-Credits
----------
+2. **Upload a CSV File**:
+    - Prepare your shipping rules in a CSV file. You can find [examples and instructions in our documentation](https://docs.shipperhq.com/category/configuration/webshopapps-extensions/matrixrates/).
+    - Go to the MatrixRate settings page and [upload your file](https://docs.shipperhq.com/1878-2/#How_to_Upload_a_CSV_File).
+
+3. **Test Checkout**:
+    - Add products to your cart and proceed to checkout to ensure the correct rates and methods appear.
+
+---
+
+## Support
+
+For further information on using Matrixrates, please refer to our [online documentation](https://docs.shipperhq.com/category/configuration/webshopapps-extensions/matrixrates/). If you have any issues with this extension, open an issue on GitHub. Alternatively you can contact us via email at support@webshopapps.com
+
+WebShopApps MatrixRates is provided AS IS and we are not accepting feature requests at this time. Extended functionality is available via [ShipperHQ](https://shipperhq.com).
+
+---
+
+## Frequently Asked Questions
+
+### 1. Can I set up free shipping for specific conditions?
+Yes, you can define a `Shipping Price` of `0.00` in the CSV file for specific conditions, such as orders over a certain amount.
+
+### 2. What happens if no rules match?
+If no rules match the customer’s criteria, MatrixRate will not display a shipping method. Ensure you have a fallback rule if needed.
+
+### 3. How do I troubleshoot issues with rates?
+- Check our troubleshooting guide in the [ShipperHQ documentation](https://docs.shipperhq.com/troubleshooting-matrixrates/).
+- Check the Magento logs for errors: `var/log/system.log` and `var/log/exception.log`.
+
+---
+
+## Credits
 This extension borrows heavily from the Tablerate capability in Magento2.  In order to keep codebase as bug-free and
 conformant as possible the tablerate code is used in preference to writing from scratch.  This hopefully also
 allows for easier understanding by users.
@@ -73,22 +81,23 @@ Assistance around composer, Magento2 structure, etc was also taken from these so
 * [https://alankent.wordpress.com/2014/08/03/creating-a-magento-2-composer-module/](http://)
 * [https://github.com/SchumacherFM/mage2-advanced-rest-permissions](http://)
 
-Contribution
-------------
+---
+
+## Contribution
+
 Any contribution is highly appreciated. The best way to contribute code is to open a [pull request on GitHub](https://help.github.com/articles/using-pull-requests).
 
-License
--------
-Copyright (c) 2020 Zowta LLC & Zowta Ltd. See [LICENSE][] for details.
+---
 
-We also dutifully respect the [Magento][] OSL license, which is included in this codebase.
+## License
 
+See license files.
 
-[license]: LICENSE.md
-[magento]: Magento2_LICENSE.md
+We also dutifully respect the Magento OSL license.
 
-Copyright
----------
-Copyright (c) 2020 Zowta LLC & Zowta Ltd.
+---
 
+## Copyright
+
+Copyright (c) 2015 Zowta LLC & Zowta Ltd. (http://www.ShipperHQ.com)
 

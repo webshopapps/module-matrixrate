@@ -88,3 +88,7 @@ SHQ23-1431 Update readme
 SHQ23-1381 Remove table on module uninstall
 
 
+## 20.4.7 (2025-01-07)
+SHQ23-4085 Update readme
+
+
