@@ -46,9 +46,11 @@ Install using composer, you can find full instructions in the [ShipperHQ documen
 
 ## Support
 
-For further information on using Matrixrates, please refer to our [online documentation](https://docs.shipperhq.com/category/configuration/webshopapps-extensions/matrixrates/). If you have any issues with this extension, open an issue on GitHub. Alternatively you can contact us via email at support@webshopapps.com
+For further information on using Matrixrates, please refer to our [online documentation](https://docs.shipperhq.com/category/configuration/webshopapps-extensions/matrixrates/).
 
-WebShopApps MatrixRates is provided AS IS and we are not accepting feature requests at this time. Extended functionality is available via [ShipperHQ](https://shipperhq.com).
+As a free extension, WebShopApps MatrixRates is provided as-is without support.
+
+WebShopApps MatrixRates is provided AS IS and we are not accepting feature requests at this time. Extended functionality and full support is available via [ShipperHQ](https://shipperhq.com).
 
 ---
 

@@ -1,94 +1,135 @@
 # Change Log
-All notable changes to this project will be documented in this file.
-This project adheres to Semantic Versioning(http://semver.org/).
 
-## 1.2.1
-Fixed composer file
+## [20.4.7](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/tree/20.4.7) (2025-01-07)
+[Full Changelog](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/-/compare/20.4.6...develop)
 
-## 1.2.2
-Removed version from composer so just uses tagged version on packagist
+## [20.4.6](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/tree/20.4.6) (2024-01-23)
+[Full Changelog](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/-/compare/20.4.5...develop)
 
-## 1.2.3
-SHQ16-911 resolved shipping carrier validation in cart and checkout
+## [20.4.5](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/tree/20.4.5) (2023-12-21)
+[Full Changelog](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/-/compare/20.4.4...develop)
 
-## 1.2.4
-M2-19 modified js validation
+## [20.4.4](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/tree/20.4.4) (2023-08-23)
+[Full Changelog](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/-/compare/20.4.3...develop)
 
-## 1.2.5
-SHQ16-1346 make address fields not mandatory and include region for support for text field region
+## [20.4.3](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/tree/20.4.3) (2022-06-21)
+[Full Changelog](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/-/compare/20.4.0...develop)
+ - [MNB-2539](https://webshopapps.atlassian.net/browse/MNB-2539) Added composer.json for marketplace [\#30](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/-/merge_requests/30) ([wsajosh](https://gitlab.com/wsajosh))
 
-## 1.2.6
-SHQ16-1335 updated docs links in readme and configuration header,  SHQ16-1346 make address fields not mandatory and include region for support for text field region, M2-19 modified js validation
+## [20.4.0](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/tree/20.4.0) (2022-05-30)
+[Full Changelog](https://gitlab.com/shipperhq/platform/m2/m2Matrixrate/-/compare/20.3.0...develop)
 
-## 1.2.7
-SHQ16-1617 remove csv from url params
+## [20.3.0](https://github.com/webshopapps/m2Matrixrate/tree/20.3.0) (2022-02-23)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/20.2.0...HEAD)
+ - [MNB-2125](https://webshopapps.atlassian.net/browse/MNB-2125) fix(address): added support for Brazil hyphenated postcodes [\#27](https://github.com/webshopapps/m2Matrixrate/pull/27) ([wsadasmit](https://github.com/wsadasmit))
+ - [MNB-5](https://webshopapps.atlassian.net/browse/MNB-5) Remove unnecessary file [\#26](https://github.com/webshopapps/m2Matrixrate/pull/26) ([wsajosh](https://github.com/wsajosh))
 
-## 20.0.6
-M2-20 account for php configuration temp dir
+## [20.2.0](https://github.com/webshopapps/m2Matrixrate/tree/20.2.0) (2021-02-08)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/20.1.9...HEAD)
+ - [MNB-923](https://webshopapps.atlassian.net/browse/MNB-923) Move DB install to XML [\#25](https://github.com/webshopapps/m2Matrixrate/pull/25) ([wsajosh](https://github.com/wsajosh))
+ - [MNB-922](https://webshopapps.atlassian.net/browse/MNB-922) Fix unit tests [\#24](https://github.com/webshopapps/m2Matrixrate/pull/24) ([wsajosh](https://github.com/wsajosh))
 
-## 20.0.7
-M2-23 remove crontab file, not required
+## [20.1.9](https://github.com/webshopapps/m2Matrixrate/tree/20.1.9) (2020-12-21)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/20.1.8...HEAD)
+ - [MNB-566](https://webshopapps.atlassian.net/browse/MNB-566) Clear down existing rates when uploading new CSV [\#23](https://github.com/webshopapps/m2Matrixrate/pull/23) ([wsajosh](https://github.com/wsajosh))
 
-## 20.0.8
-M2-20 account for upload when no upload_tmp_dir setting in php config
+## [20.1.8](https://github.com/webshopapps/m2Matrixrate/tree/20.1.8) (2020-07-16)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/20.1.7...HEAD)
+ - [MNB-472](https://webshopapps.atlassian.net/browse/MNB-472) PR from JeroenVanLeusden - Accept -1 in condition from value in CSV import [\#22](https://github.com/webshopapps/m2Matrixrate/pull/22) ([wsajosh](https://github.com/wsajosh))
 
-## 20.0.9
-M2-23 remove crontab file, not required, M2-20 account for upload when no upload_tmp_dir setting in php config, Updated readme with latest M2 issues and updated support statement
+## [20.1.7](https://github.com/webshopapps/m2Matrixrate/tree/20.1.7) (2020-06-30)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/20.1.6...HEAD)
+ - [MNB-455](https://webshopapps.atlassian.net/browse/MNB-455) Make MatrixRate codes easier to extend [\#21](https://github.com/webshopapps/m2Matrixrate/pull/21) ([wsajosh](https://github.com/wsajosh))
 
-## 20.1.0
-M2-23 remove crontab file
+## [20.1.6](https://github.com/webshopapps/m2Matrixrate/tree/20.1.6) (2020-05-05)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/20.1.5...HEAD)
+ - [MNB-3](https://webshopapps.atlassian.net/browse/MNB-3) Fix MatrixRate unit tests [\#20](https://github.com/webshopapps/m2Matrixrate/pull/20) ([wsajosh](https://github.com/wsajosh))
 
-## 20.2.3 (2019-05-09)
-SHQ18-1978 Trim postcode and ensure condition value is not null
+## [20.1.5](https://github.com/webshopapps/m2Matrixrate/tree/20.1.5) (2019-05-09)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/20.1.4...20.1.5)
+
+**Merged pull requests:**
+
+- Merge master to develop [\#19](https://github.com/webshopapps/m2MatrixRate/pull/19) ([wsajosh](https://github.com/wsajosh))
+- Bringing all branches in line [\#16](https://github.com/webshopapps/m2MatrixRate/pull/16) ([wsajosh](https://github.com/wsajosh))
+- INFRA-107 Updated readme to show 2.3 and PHP compatibility [\#15](https://github.com/webshopapps/m2MatrixRate/pull/15) ([wsajason](https://github.com/wsajason))
+
+## [20.1.4](https://github.com/webshopapps/m2Matrixrate/tree/20.1.4) (2017-12-18)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/20.1.3...20.1.4)
+
+**Merged pull requests:**
+
+- SHQ16-2486 Fix rate matching when using country,region,post,w/o city [\#13](https://github.com/webshopapps/m2MatrixRate/pull/13) ([TravisBernard](https://github.com/TravisBernard))
+- Merging master to develop [\#12](https://github.com/webshopapps/m2MatrixRate/pull/12) ([wsajosh](https://github.com/wsajosh))
+
+## [20.1.3](https://github.com/webshopapps/m2Matrixrate/tree/20.1.3) (2017-11-01)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/20.1.2...20.1.3)
+
+## [20.1.2](https://github.com/webshopapps/m2Matrixrate/tree/20.1.2) (2017-08-16)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/20.1.1...20.1.2)
+
+**Merged pull requests:**
+
+- M2-36 Fixed issue with city field being flagged as duplicate [\#10](https://github.com/webshopapps/m2MatrixRate/pull/10) ([wsajosh](https://github.com/wsajosh))
+- M2-24 renamed test directory to Test [\#9](https://github.com/webshopapps/m2MatrixRate/pull/9) ([wsagen](https://github.com/wsagen))
+- M2-25 Support for value from and to with \*  [\#8](https://github.com/webshopapps/m2MatrixRate/pull/8) ([wsagen](https://github.com/wsagen))
+
+## [20.1.1](https://github.com/webshopapps/m2Matrixrate/tree/20.1.1) (2017-03-28)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/20.1.0...20.1.1)
+
+**Merged pull requests:**
+
+- Updated changelog to reflect the public tag numbers [\#7](https://github.com/webshopapps/m2MatrixRate/pull/7) ([wsajason](https://github.com/wsajason))
+- M2-24 Syntax and code convention changes  [\#5](https://github.com/webshopapps/m2MatrixRate/pull/5) ([wsagen](https://github.com/wsagen))
+
+## [20.1.0](https://github.com/webshopapps/m2Matrixrate/tree/20.1.0) (2017-03-23)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.3.1...20.1.0)
+
+**Merged pull requests:**
+
+- Changelog reformat [\#3](https://github.com/webshopapps/m2MatrixRate/pull/3) ([wsajason](https://github.com/wsajason))
+
+## [1.3.1](https://github.com/webshopapps/m2Matrixrate/tree/1.3.1) (2017-01-25)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.3.0...1.3.1)
+
+**Closed issues:**
+
+- Initial Dev Release [\#1](https://github.com/webshopapps/m2MatrixRate/issues/1)
+
+## [1.3.0](https://github.com/webshopapps/m2Matrixrate/tree/1.3.0) (2017-01-19)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.9...1.3.0)
+
+## [1.2.9](https://github.com/webshopapps/m2Matrixrate/tree/1.2.9) (2016-12-22)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.8...1.2.9)
+
+## [1.2.8](https://github.com/webshopapps/m2Matrixrate/tree/1.2.8) (2016-11-21)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.7...1.2.8)
+
+## [1.2.7](https://github.com/webshopapps/m2Matrixrate/tree/1.2.7) (2016-10-03)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.6...1.2.7)
+
+## [1.2.6](https://github.com/webshopapps/m2Matrixrate/tree/1.2.6) (2016-08-17)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.5...1.2.6)
+
+## [1.2.5](https://github.com/webshopapps/m2Matrixrate/tree/1.2.5) (2016-04-07)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.4...1.2.5)
+
+## [1.2.4](https://github.com/webshopapps/m2Matrixrate/tree/1.2.4) (2016-04-07)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.3...1.2.4)
+
+## [1.2.3](https://github.com/webshopapps/m2Matrixrate/tree/1.2.3) (2016-03-17)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.2...1.2.3)
+
+## [1.2.2](https://github.com/webshopapps/m2Matrixrate/tree/1.2.2) (2016-03-14)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.2.1...1.2.2)
+
+## [1.2.1](https://github.com/webshopapps/m2Matrixrate/tree/1.2.1) (2016-02-25)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.1.0...1.2.1)
+
+## [1.1.0](https://github.com/webshopapps/m2Matrixrate/tree/1.1.0) (2016-02-25)
+[Full Changelog](https://github.com/webshopapps/m2Matrixrate/compare/1.0.0...1.1.0)
+
+## [1.0.0](https://github.com/webshopapps/m2Matrixrate/tree/1.0.0) (2015-12-11)
 
 
-## 20.1.5 (2019-05-09)
-SHQ18-1978 Trim postcode and ensure condition value is not null
-
-
-## 20.1.6 (2020-05-05)
-MNB-3 Fix MatrixRate unit tests
-
-
-## 20.1.7 (2020-06-30)
-MNB-455 Submitted by JeroenVanLeusden. Extract condition codes to own method
-
-
-## 20.1.8 (2020-07-16)
-MNB-472 PR from JeroenVanLeusden - Accept -1 in condition from value in CSV import
-
-
-## 20.1.9 (2020-12-21)
-MNB-566 Clear down old date when upload new CSV
-
-
-## 20.2.0 (2021-02-08)
-MNB-923 Move DB install to XML. MNB-922 Fix unit tests
-
-
-## 20.3.0 (2022-02-23)
-MNB-2125 added support for BR postcode with hyphen
-## 20.4.0 (2022-05-30)
-MNB-2539 Add support for Magento 2.4.4
-
-
-## 20.4.3 (2022-06-21)
-MNB-2539 Add support for Magento 2.4.4
-
-
-## 20.4.4 (2023-08-23)
-SHQ23-433 Better handling of zero conditions
-
-
-## 20.4.5 (2023-12-21)
-SHQ23-1431 Update readme
-
-
-## 20.4.6 (2024-01-23)
-SHQ23-1381 Remove table on module uninstall
-
-
-## 20.4.7 (2025-01-07)
-SHQ23-4085 Update readme
-
-
+\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
