@@ -1,7 +1,7 @@
 {
     "name": "webshopapps/module-matrixrate",
     "description": "Magento Shipping Multiple Table Rates - MatrixRate",
-    "version": "20.4.8",
+    "version": "20.4.9",
     "license": [
         "OSL-3.0",
         "AFL-3.0"

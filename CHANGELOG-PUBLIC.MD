@@ -92,3 +92,7 @@ SHQ23-1381 Remove table on module uninstall
 SHQ23-4085 Update readme
 
 
+## 20.4.9 (2025-01-31)
+INFRA-893 Added missing mp release step
+
+
