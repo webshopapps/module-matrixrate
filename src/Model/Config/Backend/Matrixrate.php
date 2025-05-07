@@ -16,7 +16,7 @@
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs, please refer to http://www.magentocommerce.com for more information.
  *
  * WebShopApps MatrixRate
  *
@@ -27,44 +27,44 @@
  * @author WebShopApps Team sales@webshopapps.com
  *
  */
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
 namespace WebShopApps\MatrixRate\Model\Config\Backend;
 
+use Magento\Framework\App\Cache\TypeListInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Config\Value;
+use Magento\Framework\Data\Collection\AbstractDb;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Model\ResourceModel\AbstractResource;
+use Magento\Framework\Registry;
+use WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory;
 
-/**
- * Backend model for shipping table rates CSV importing
- *
- * @author      Magento Core Team <core@magentocommerce.com>
- */
-class Matrixrate extends \Magento\Framework\App\Config\Value
+class Matrixrate extends Value
 {
     /**
-     * @var \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory
+     * @var MatrixrateFactory
      */
     protected $matrixrateFactory;
 
     /**
-     * @param \Magento\Framework\Model\Context $context
-     * @param \Magento\Framework\Registry $registry
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $config
-     * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
-     * @param \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory $matrixrateFactory
-     * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
-     * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
+     * @param Context $context
+     * @param Registry $registry
+     * @param ScopeConfigInterface $config
+     * @param TypeListInterface $cacheTypeList
+     * @param MatrixrateFactory $matrixrateFactory
+     * @param AbstractResource $resource
+     * @param AbstractDb $resourceCollection
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\Model\Context $context,
-        \Magento\Framework\Registry $registry,
-        \Magento\Framework\App\Config\ScopeConfigInterface $config,
-        \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
-        \WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory $matrixrateFactory,
-        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        Context $context,
+        Registry $registry,
+        ScopeConfigInterface $config,
+        TypeListInterface $cacheTypeList,
+        MatrixrateFactory $matrixrateFactory,
+        ?AbstractResource $resource = null,
+        ?AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->matrixrateFactory = $matrixrateFactory;
@@ -72,7 +72,8 @@ class Matrixrate extends \Magento\Framework\App\Config\Value
     }
 
     /**
-     * @return \Magento\Framework\Model\AbstractModel|void
+     * @return AbstractModel|void
+     * @throws LocalizedException
      */
     public function afterSave()
     {

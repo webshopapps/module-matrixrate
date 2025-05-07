@@ -96,3 +96,7 @@ SHQ23-4085 Update readme
 INFRA-893 Added missing mp release step
 
 
+## 20.5.0 (2025-05-07)
+SHQ23-4872 PHP8.4 and Magento 2.4.8 compatibility
+
+
