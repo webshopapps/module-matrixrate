@@ -38,14 +38,7 @@
         <section id="carriers">
             <group id="matrixrate" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>WebShopApps Matrix Rate</label>
-                <comment>
-                    <![CDATA[
-				<div style="padding:10px;background-color:#fff;border:1px solid #ddd;margin-bottom:7px;">
-				This module was developed by <a href="http://www.webshopapps.com" target="_blank">www.WebShopApps.com</a> - <b>Magento Shipping Extension Specialists</b>.
-				<br/>For docs & examples refer to the MatrixRate <a href="http://docs.shipperhq.com/category/troubleshooting/ecommerce-platform/matrixrates/">knowledge base</a>.
-				</div>
-			  ]]>
-                </comment>
+                <frontend_model>WebShopApps\MatrixRate\Block\Adminhtml\System\Config\Fieldset\Upsell</frontend_model>
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>

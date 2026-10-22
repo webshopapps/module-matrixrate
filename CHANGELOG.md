@@ -108,3 +108,7 @@ SHQ23-4872 PHP8.4 and Magento 2.4.8 compatibility
 ENG26-1125 Updates for Magento 2.4.9 and PHP 8.5 compatibility
 
 
+## 20.5.3 (2026-10-22)
+ENG26-2067 Improving admin UI
+
+
