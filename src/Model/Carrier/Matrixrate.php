@@ -115,6 +115,8 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
             return false;
         }
 
+        $originalPackageValue = $request->getPackageValue();
+
         // exclude Virtual products price from Package value if pre-configured
         if (!$this->getConfigFlag('include_virtual_price') && $request->getAllItems()) {
             foreach ($request->getAllItems() as $item) {
@@ -181,6 +183,7 @@ class Matrixrate extends \Magento\Shipping\Model\Carrier\AbstractCarrier impleme
 
         $request->setPackageWeight($oldWeight);
         $request->setPackageQty($oldQty);
+        $request->setPackageValue($originalPackageValue);
 
         $foundRates = false;
 
