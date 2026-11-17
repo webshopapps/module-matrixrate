@@ -58,7 +58,7 @@ class MatrixrateTest extends TestCase
         $this->tableateFactoryMock =
             $this->getMockBuilder('WebShopApps\MatrixRate\Model\ResourceModel\Carrier\MatrixrateFactory')
             ->disableOriginalConstructor()
-            ->setMethods(['create'])
+            ->onlyMethods(['create'])
             ->getMock();
 
         $this->model = $this->objectManagerHelper->getObject(
@@ -72,7 +72,7 @@ class MatrixrateTest extends TestCase
     {
         $matrixrateMock = $this->getMockBuilder('WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate')
             ->disableOriginalConstructor()
-            ->setMethods(['uploadAndImport'])
+            ->onlyMethods(['uploadAndImport'])
             ->getMock();
 
         $this->tableateFactoryMock->expects($this->once())

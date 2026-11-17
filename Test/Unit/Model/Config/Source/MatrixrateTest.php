@@ -55,7 +55,7 @@ class MatrixrateTest extends TestCase
     {
         $this->carrierMatrixrateMock = $this->getMockBuilder('\WebShopApps\MatrixRate\Model\Carrier\Matrixrate')
             ->disableOriginalConstructor()
-            ->setMethods(['getCode'])
+            ->onlyMethods(['getCode'])
             ->getMock();
 
         $this->objectManagerHelper = new ObjectManagerHelper($this);
