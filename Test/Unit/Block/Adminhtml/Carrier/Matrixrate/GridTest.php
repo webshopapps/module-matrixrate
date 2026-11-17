@@ -49,60 +49,14 @@ class GridTest extends TestCase
      */
     protected $storeManagerMock;
 
-    /**
-     * @var \Magento\Backend\Helper\Data|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $backendHelperMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $matrixrateMock;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $context;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $collectionFactoryMock;
-
-    /** @var ObjectManagerHelper */
-    protected $objectManagerHelper;
-
     protected function setUp(): void
     {
-        $this->objectManagerHelper = new ObjectManagerHelper($this);
-
-        $this->storeManagerMock = $this->getMockBuilder('Magento\Store\Model\StoreManagerInterface')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->context = $this->objectManagerHelper->getObject('Magento\Backend\Block\Template\Context', [
-            'storeManager' => $this->storeManagerMock
-        ]);
-
-        $this->backendHelperMock = $this->getMockBuilder('\Magento\Backend\Helper\Data')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->collectionFactoryMock =
-            $this->getMockBuilder('\WebShopApps\MatrixRate\Model\ResourceModel\Carrier\Matrixrate\CollectionFactory')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->matrixrateMock = $this->getMockBuilder('WebShopApps\MatrixRate\Model\Carrier\Matrixrate')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->model = new \WebShopApps\MatrixRate\Block\Adminhtml\Carrier\Matrixrate\Grid(
-            $this->context,
-            $this->backendHelperMock,
-            $this->collectionFactoryMock,
-            $this->matrixrateMock
-        );
+        $this->storeManagerMock = $this->createMock(\Magento\Store\Model\StoreManagerInterface::class);
+        $this->model = (new \ReflectionClass(
+            \WebShopApps\MatrixRate\Block\Adminhtml\Carrier\Matrixrate\Grid::class
+        ))->newInstanceWithoutConstructor();
+        $objectManagerHelper = new ObjectManagerHelper($this);
+        $objectManagerHelper->setBackwardCompatibleProperty($this->model, '_storeManager', $this->storeManagerMock);
     }
 
     public function testSetWebsiteId()
@@ -110,7 +64,7 @@ class GridTest extends TestCase
         $websiteId = 1;
 
         $websiteMock = $this->getMockBuilder('Magento\Store\Model\Website')
-            ->setMethods(['getId'])
+            ->onlyMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -133,7 +87,7 @@ class GridTest extends TestCase
 
         $websiteMock = $this->getMockBuilder('Magento\Store\Model\Website')
             ->disableOriginalConstructor()
-            ->setMethods(['getId'])
+            ->onlyMethods(['getId'])
             ->getMock();
 
         $websiteMock->expects($this->once())
@@ -145,10 +99,6 @@ class GridTest extends TestCase
             ->willReturn($websiteMock);
 
         $this->assertEquals($websiteId, $this->model->getWebsiteId());
-
-        $this->storeManagerMock->expects($this->never())
-            ->method('getWebsite')
-            ->willReturn($websiteMock);
 
         $this->assertEquals($websiteId, $this->model->getWebsiteId());
     }

@@ -52,7 +52,6 @@ class ImportTest extends TestCase
     protected function setUp(): void
     {
         $this->formMock = $this->getMockBuilder(\Magento\Framework\Data\Form::class)
-            ->addMethods(['getFieldNameSuffix', 'getHtmlIdPrefix', 'getHtmlIdSuffix'])
             ->onlyMethods(['addSuffixToName'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -74,7 +73,7 @@ class ImportTest extends TestCase
 
     public function testGetNameWhenFormFiledNameSuffixIsEmpty()
     {
-        $this->formMock->expects($this->once())->method('getFieldNameSuffix')->will($this->returnValue(false));
+        $this->formMock->setData('field_name_suffix', false);
         $this->formMock->expects($this->never())->method('addSuffixToName');
         $actual = $this->object->getName();
         $this->assertEquals('test_name', $actual);
@@ -82,28 +81,18 @@ class ImportTest extends TestCase
 
     public function testGetNameWhenFormFiledNameSuffixIsNotEmpty()
     {
-        $this->formMock->expects($this->once())->method('getFieldNameSuffix')->will($this->returnValue(true));
-        $this->formMock->expects($this->once())->method('addSuffixToName')->will($this->returnValue('test_suffix'));
+        $this->formMock->setData('field_name_suffix', 'suffix');
+        $this->formMock->expects($this->once())->method('addSuffixToName')
+            ->with('test_name', 'suffix')
+            ->willReturn('test_suffix');
         $actual = $this->object->getName();
         $this->assertEquals('test_suffix', $actual);
     }
 
     public function testGetElementHtml()
     {
-        $this->formMock->expects(
-            $this->any()
-        )->method(
-            'getHtmlIdPrefix'
-        )->willReturn(
-            'test_name_prefix'
-        );
-        $this->formMock->expects(
-            $this->any()
-        )->method(
-            'getHtmlIdSuffix'
-        )->willReturn(
-            'test_name_suffix'
-        );
+        $this->formMock->setData('html_id_prefix', 'test_name_prefix');
+        $this->formMock->setData('html_id_suffix', 'test_name_suffix');
         $testString = $this->object->getElementHtml();
         $this->assertStringStartsWith(
             '<input id="time_condition" type="hidden" name="test_name" value="',
